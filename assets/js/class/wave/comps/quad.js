@@ -25,7 +25,7 @@ export default class{
         this.vh = vh
 
         this.sizeRatio = 1.5
-        this.deg = 14
+        this.deg = 15
 
         this.init()
     }
