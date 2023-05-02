@@ -1,37 +1,36 @@
 // import ShaderMethod from '../../../method/method.shader.js'
-import * as BABYLON from 'babylonjs'
 
-const name = 'waveQuad'
-
-const getShaderName = () => {
-    const vertex = `
+export default {
+    vertex: `
         attribute vec3 position;
         attribute vec2 uv;
 
         uniform mat4 worldViewProjection;
 
-        varying vec2 vUv;
+        // varying vec2 vUv;
 
         void main(){
             gl_Position = worldViewProjection * vec4(position, 1.0);
 
-            vUv = uv;
+            // vUv = uv;
         }
-    `
-    const fragment = `
+    `,
+    fragment: `
         // uniform vec3 uColor;
+        uniform float rw;
+        uniform float rh;
+        uniform float deg;
 
-        varying vec2 vUv;
+        // varying vec2 vUv;
 
         void main(){
-            gl_FragColor = vec4(1);
+            vec2 coord = gl_FragCoord.xy - vec2(rw, rh) * 0.5;
+
+            float boundX = coord.y / tan(radians(90.0 - deg));
+
+            float opacity = step(boundX, coord.x);
+
+            gl_FragColor = vec4(vec3(1), opacity);
         }
     `
-    
-    BABYLON.Effect.ShadersStore[name + 'VertexShader'] = vertex
-    BABYLON.Effect.ShadersStore[name + 'FragmentShader'] = fragment
-
-    return name
 }
-
-export default getShaderName

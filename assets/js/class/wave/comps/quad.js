@@ -1,6 +1,8 @@
 import {RADIAN} from '~/utils/const.js'
 import Plane from '~/assets/js/class/objects/plane.js'
-import GetShaderName from '../shader/quad.shader.js'
+import Shader from '../shader/quad.shader.js'
+
+import * as BABYLON from 'babylonjs'
 
 export default class{
     constructor({
@@ -8,6 +10,8 @@ export default class{
         scene,
         camera,
         color,
+        rw,
+        rh,
         vw,
         vh,
     }){
@@ -15,6 +19,8 @@ export default class{
         this.scene = scene
         this.camera = camera
         this.color = color
+        this.rw = rw
+        this.rh = rh
         this.vw = vw
         this.vh = vh
 
@@ -35,7 +41,7 @@ export default class{
     create(){
         const {scene, engine, vw, vh} = this
 
-        const {material} = this.createMaterial()
+        const material = this.createMaterial()
 
         this.quad = new Plane({
             geometryOpt: {
@@ -49,22 +55,27 @@ export default class{
         this.quad.setMaterial(material)
     }
     createMaterial(){
-        const shaderName = GetShaderName()
+        const {scene, rw, rh, deg} = this
 
-        const material = new BABYLON.ShaderMaterial('material', this.scene,
+        const material = new BABYLON.ShaderMaterial('material', scene,
             {
-                vertex: shaderName,
-                fragment: shaderName
+                vertexSource: Shader.vertex,
+                fragmentSource: Shader.fragment
             },
             {
                 attributes: ['position', 'normal', 'uv'],
-                uniforms: ['world', 'worldView', 'worldViewProjection', 'view', 'projection', 'viewProjection', 'uColor'],
+                uniforms: ['world', 'worldView', 'worldViewProjection', 'view', 'projection', 'viewProjection', 'rw', 'rh', 'deg'],
                 needAlphaBlending: true,
                 needAlphaTesting: true,
             }
         )
 
         // material.setColor3('uColor', this.color)
+        material.setFloat('rw', rw)
+        material.setFloat('rh', rh)
+        material.setFloat('deg', deg)
+
+        console.log(rw)
 
         return material
     }

@@ -11,7 +11,7 @@ export default class{
 
         this.scene = null
         this.camera = null
-        this.cameraName = 'waveCamaera'
+        this.cameraName = 'waveCamera'
         this.cameraPos = new BABYLON.Vector3(0, 0, -100)
         this.rw = this.engine.getRenderWidth()
         this.rh = this.engine.getRenderHeight()
@@ -65,7 +65,7 @@ export default class{
                 new instance({
                     scene: this.scene, 
                     engine: this.engine, 
-                    audio: this.audio, 
+                    audio: this.audio,
                     camera: this.camera,
                     rw: this.rw,
                     rh: this.rh,
