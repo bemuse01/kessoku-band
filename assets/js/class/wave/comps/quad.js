@@ -75,8 +75,6 @@ export default class{
         material.setFloat('rh', rh)
         material.setFloat('deg', deg)
 
-        console.log(rw)
-
         return material
     }
 
