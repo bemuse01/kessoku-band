@@ -1,5 +1,6 @@
 import {RADIAN} from '~/utils/const.js'
 import Plane from '~/assets/js/class/objects/plane.js'
+import GetShaderName from '../shader/quad.shader.js'
 
 export default class{
     constructor({
@@ -34,34 +35,38 @@ export default class{
     create(){
         const {scene, engine, vw, vh} = this
 
+        const {material} = this.createMaterial()
+
         this.quad = new Plane({
             geometryOpt: {
-                width: vw / 2,
-                height: vh / 2,
+                width: vw,
+                height: vh,
             },
             scene,
             engine
         })
+
+        this.quad.setMaterial(material)
     }
     createMaterial(){
-        // const shaderName = GetShaderName()
+        const shaderName = GetShaderName()
 
-        // const material = new BABYLON.ShaderMaterial('material', this.scene,
-        //     {
-        //         vertex: shaderName,
-        //         fragment: shaderName
-        //     },
-        //     {
-        //         attributes: ['position', 'normal', 'uv'],
-        //         uniforms: ['world', 'worldView', "worldViewProjection", 'view', 'projection', 'viewProjection', 'uColor'],
-        //         needAlphaBlending: true,
-        //         needAlphaTesting: true,
-        //     }
-        // )
+        const material = new BABYLON.ShaderMaterial('material', this.scene,
+            {
+                vertex: shaderName,
+                fragment: shaderName
+            },
+            {
+                attributes: ['position', 'normal', 'uv'],
+                uniforms: ['world', 'worldView', 'worldViewProjection', 'view', 'projection', 'viewProjection', 'uColor'],
+                needAlphaBlending: true,
+                needAlphaTesting: true,
+            }
+        )
 
         // material.setColor3('uColor', this.color)
 
-        // return material
+        return material
     }
 
 
