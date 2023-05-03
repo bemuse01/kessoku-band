@@ -64,7 +64,7 @@ export default class{
             },
             {
                 attributes: ['position', 'normal', 'uv'],
-                uniforms: ['world', 'worldView', 'worldViewProjection', 'view', 'projection', 'viewProjection', 'rw', 'rh', 'deg'],
+                uniforms: ['world', 'worldView', 'worldViewProjection', 'view', 'projection', 'viewProjection', 'rw', 'rh', 'deg', 'time'],
                 needAlphaBlending: true,
                 needAlphaTesting: true,
             }
@@ -74,6 +74,7 @@ export default class{
         material.setFloat('rw', rw)
         material.setFloat('rh', rh)
         material.setFloat('deg', deg)
+        material.setFloat('time', 0)
 
         return material
     }
@@ -101,5 +102,10 @@ export default class{
         this.render()
     }
     render(){
+        const material = this.quad.getMaterial()
+
+        const time = window.performance.now()
+
+        material.setFloat('time', time)
     }
 }
