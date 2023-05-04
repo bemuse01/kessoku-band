@@ -8,7 +8,7 @@
         >
             <div
                 :class="classes.scroll"
-                :style="styles.scroll"
+                :style="scrollStyle"
             >
 
                 <div
@@ -27,7 +27,7 @@
 </template>
 
 <script setup>
-import Method from '~/utils/method.js'
+import Method from '~/utils/method.math.js'
 
 const classes = reactive({
     container: 'absolute overflow-hidden w-[100vw] h-[100vh] flex justify-center items-center',
@@ -35,22 +35,21 @@ const classes = reactive({
     scroll: 'w-full h-full',
     item: 'w-full h-full bg-[rgba(255,0,0,0.5)] rounded-[25%]'
 })
-const styles = reactive({
-    scroll: {
-        transform: 'translateY(-200%)'
-    }
-})
 
 
 const items = ref(Array.from({length: 10}, (_, key) => ({key})))
+
+
+// scroll
 const lerpVelocity = 0.11
 const idx = ref(0)
 const cy = ref(0)
 const py = ref(0)
+const scrollStyle = computed(() => ({transform: `translateY(-${cy.value}%)`}))
 
 
 const onMouseWheel = (e) => {
-    const direction = -Math.sign(e.wheelDeltaY)
+    const direction = Math.sign(e.deltaY)
 
     idx.value += direction
     idx.value = Method.clamp(idx.value, 0, items.value.length - 1)
@@ -59,8 +58,6 @@ const onMouseWheel = (e) => {
 }
 const updateScrollStyle = () => {
     cy.value = Method.lerp(cy.value, py.value, lerpVelocity)
-
-    styles.scroll.transform = `translateY(-${cy.value}%)`
 }
 const animate = () => {
     updateScrollStyle()
@@ -68,7 +65,7 @@ const animate = () => {
 }
 const init = () => {
     animate()
-    window.addEventListener('wheel', (e) => onMouseWheel(e), false)
+    window.addEventListener('wheel', (e) => onMouseWheel(e))
 }
 
 

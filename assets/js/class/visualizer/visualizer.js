@@ -1,4 +1,4 @@
-import Method from '~/utils/method.js'
+import Method from '~/utils/method.math.js'
 import * as BABYLON from 'babylonjs'
 
 import Quad from './comps/quad.js'
