@@ -7,3 +7,15 @@
   opacity: 0;
   transform: translateX(5%);
 }
+
+
+.translate-enter-active,
+.translate-leave-active {
+  transition: all 1.2s;
+}
+.translate-enter-from{
+  transform: translateX(-100%);
+}
+.translate-leave-to {
+  transform: translateX(100%);
+}
