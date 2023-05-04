@@ -65,8 +65,6 @@ const createTween = (key) => {
     const start = {x: -100}
     const end = {x: 0}
 
-    console.log(bgs.value)
-
     const to = {
         ...end,
         duration: tweenTime,
