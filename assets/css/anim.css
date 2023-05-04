@@ -11,7 +11,7 @@
 
 .translate-enter-active,
 .translate-leave-active {
-  transition: all 1.2s;
+  transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .translate-enter-from{
   transform: translateX(-100%);
