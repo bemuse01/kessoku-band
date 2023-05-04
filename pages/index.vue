@@ -3,7 +3,9 @@
         :class="classes.wrapper"
     >
 
-        <render-container />
+        <!-- <render-container /> -->
+
+        <bg-container />
 
         <vinyl-container />
 

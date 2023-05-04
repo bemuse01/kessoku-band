@@ -37,9 +37,9 @@ export default {
             // float opacity = (snoise3D(vec3(idx * 0.05, time * 0.00025)) + 1.0) * 0.5;
             // gl_FragColor = vec4(vec3(1), 1.0 - opacity * 0.5);
 
-            float boundX = coord.y / tan(radians(90.0 - deg));
+            // float boundX = coord.y / tan(radians(90.0 - deg));
 
-            if(coord.x < boundX) discard;
+            // if(coord.x < boundX) discard;
 
             gl_FragColor = vec4(1);
         }
