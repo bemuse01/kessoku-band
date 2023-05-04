@@ -1,3 +1,4 @@
 const RADIAN = Math.PI / 180
+const GLOBAL_DEGREE = 15
 
-export {RADIAN}
+export {RADIAN, GLOBAL_DEGREE}
