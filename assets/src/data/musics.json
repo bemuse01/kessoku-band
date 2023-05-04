@@ -29,15 +29,6 @@
     {
         "id": 3,
         "artist_en": "Kessoku Band",
-        "title_en": "Distortion!!",
-        "artist_jp": "結束バンド",
-        "title_jp": "Distortion!!",
-        "audio_filename": "distortion.mp3",
-        "cover_filename": "distortion.jpg"
-    },
-    {
-        "id": 4,
-        "artist_en": "Kessoku Band",
         "title_en": "Guitar, Loneliness and Blue Planet",
         "artist_jp": "結束バンド",
         "title_jp": "ギターと孤独と蒼い惑星",
@@ -45,7 +36,7 @@
         "cover_filename": "g_l_b.jpg"
     },
     {
-        "id": 5,
+        "id": 4,
         "artist_en": "Kessoku Band",
         "title_en": "That band",
         "artist_jp": "結束バンド",
@@ -54,7 +45,7 @@
         "cover_filename": "that_band.jpg"
     },
     {
-        "id": 6,
+        "id": 5,
         "artist_en": "Kessoku Band",
         "title_en": "What is wrong with",
         "artist_jp": "結束バンド",
@@ -63,7 +54,7 @@
         "cover_filename": "what_is_wrong.jpg"
     },
     {
-        "id": 7,
+        "id": 6,
         "artist_en": "Kessoku Band",
         "title_en": "Never forget",
         "artist_jp": "結束バンド",
@@ -72,13 +63,22 @@
         "cover_filename": "never_forget.jpg"
     },
     {
-        "id": 8,
+        "id": 7,
         "artist_en": "Kessoku Band",
         "title_en": "If I could be a constellation",
         "artist_jp": "結束バンド",
         "title_jp": "星座になれたら",
         "audio_filename": "constellation.mp3",
         "cover_filename": "constellation.jpg"
+    },
+    {
+        "id": 8,
+        "artist_en": "Kessoku Band",
+        "title_en": "Rockn' Roll, Morning Light Falls on You",
+        "artist_jp": "結束バンド",
+        "title_jp": "転がる岩, 君に朝が降る",
+        "audio_filename": "rockn_roll.mp3",
+        "cover_filename": "rockn_roll.jpg"
     },
     {
         "id": 9,
