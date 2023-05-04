@@ -27,16 +27,24 @@
 </template>
 
 <script setup>
-import {GLOBAL_DEGREE} from '~/utils/const.js'
+// import {GLOBAL_DEGREE} from '~/utils/const.js'
 import Method from '~/utils/method.math.js'
 import Vinyl from './Vinyl.vue'
 import musics from '~/assets/src/data/musics.json'
+import {useMusicStore} from '~/stores/music.js'
+import {storeToRefs} from 'pinia'
+
+
+// store
+const store = useMusicStore()
+const {setIdx} = store
+const {getIdx} = storeToRefs(store)
 
 
 // class
 const classes = reactive({
     container: 'absolute overflow-hidden w-[100vw] h-[100vh] flex justify-center items-center',
-    box: `w-[100vh] aspect-square rotate-[${GLOBAL_DEGREE}deg]`,
+    box: 'w-[100vh] aspect-square rotate-[15deg]',
     scroll: 'w-full h-full',
     item: 'w-full h-full bg-[rgba(255,0,0,0.5)] rounded-[25%]'
 })
@@ -59,10 +67,9 @@ const updateCy = () => {
     cy.value = Method.lerp(cy.value, py.value, lerpVelocity)
 }
 const updatePy = (direction) => {
-    idx.value += direction
-    idx.value = Method.clamp(idx.value, 0, vinyls.value.length - 1)
+    setIdx(direction, 0, vinyls.value.length - 1)
 
-    py.value = idx.value * 100
+    py.value = getIdx.value * 100
 }
 
 

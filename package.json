@@ -16,6 +16,7 @@
     "@nuxtjs/tailwindcss": "^6.6.6",
     "@pinia/nuxt": "^0.4.9",
     "babylonjs": "^6.0.0",
+    "lodash": "^4.17.21",
     "pinia": "^2.0.35"
   },
   "overrides": {
