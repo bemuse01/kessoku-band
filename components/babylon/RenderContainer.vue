@@ -2,6 +2,8 @@
     <div
         :class="classes.container"
     >
+
+        <render-bg-right />
         
         <div 
             :class="classes.canvasBox"
@@ -14,11 +16,13 @@
 
         </div>
 
+        <render-bg-left />
+
         <div 
             :class="classes.objectBox"
         >
 
-            <visualizer :engine="engine" />
+            <!-- <visualizer :engine="engine" /> -->
 
         </div>
 
@@ -28,14 +32,16 @@
 <script setup>
 import {Engine} from 'babylonjs'
 import Visualizer from './Visualizer.vue'
+import RenderBgRight from './RenderBgRight.vue'
+import RenderBgLeft from './RenderBgLeft.vue'
 
 
 // class
 const classes = reactive({
     container: 'absolute top-0 left-0 w-[100vw] h-[100vh]',
-    canvasBox: 'w-full h-full',
+    canvasBox: 'w-full h-full absolute',
     canvas: 'w-full h-full',
-    objectBox: ''
+    objectBox: 'absolute'
 })
 
 

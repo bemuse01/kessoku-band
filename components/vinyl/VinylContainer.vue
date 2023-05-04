@@ -27,6 +27,7 @@
 </template>
 
 <script setup>
+import {GLOBAL_DEGREE} from '~/utils/const.js'
 import Method from '~/utils/method.math.js'
 import Vinyl from './Vinyl.vue'
 import musics from '~/assets/src/data/musics.json'
@@ -35,7 +36,7 @@ import musics from '~/assets/src/data/musics.json'
 // class
 const classes = reactive({
     container: 'absolute overflow-hidden w-[100vw] h-[100vh] flex justify-center items-center',
-    box: 'w-[100vh] h-[100vh] rotate-[15deg]',
+    box: `w-[100vh] aspect-square rotate-[${GLOBAL_DEGREE}deg]`,
     scroll: 'w-full h-full',
     item: 'w-full h-full bg-[rgba(255,0,0,0.5)] rounded-[25%]'
 })
