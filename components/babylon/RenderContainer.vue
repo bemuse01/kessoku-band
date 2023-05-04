@@ -18,7 +18,7 @@
             :class="classes.objectBox"
         >
 
-            <wave :engine="engine" />
+            <visualizer :engine="engine" />
 
         </div>
 
@@ -27,7 +27,7 @@
 
 <script setup>
 import {Engine} from 'babylonjs'
-import Wave from './Wave.vue'
+import Visualizer from './Visualizer.vue'
 
 
 // class

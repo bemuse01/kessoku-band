@@ -11,7 +11,7 @@ export default class{
 
         this.scene = null
         this.camera = null
-        this.cameraName = 'waveCamera'
+        this.cameraName = 'visualizerCamera'
         this.cameraPos = new BABYLON.Vector3(0, 0, -100)
         this.rw = this.engine.getRenderWidth()
         this.rh = this.engine.getRenderHeight()

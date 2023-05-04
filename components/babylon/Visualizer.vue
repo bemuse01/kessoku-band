@@ -3,7 +3,7 @@
 </template>
 
 <script setup>
-import Wave from '~/assets/js/class/wave/wave.js'
+import Wave from '~/assets/js/class/visualizer/visualizer.js'
 
 
 // props
