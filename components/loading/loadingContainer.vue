@@ -20,7 +20,7 @@ import LogoBox from './LogoBox.vue'
 
 
 // emit
-const emit = defineEmits('loadingDone')
+const emit = defineEmits(['loadingDone'])
 
 
 // class

@@ -41,7 +41,7 @@ import {storeToRefs} from 'pinia'
 // store
 const store = useMusicStore()
 const {setIdx, playPlayer, stopPlayer, setPlayerSrc} = store
-const {getIdx, getIsPaused} = storeToRefs(store)
+const {getIdx, getIsPaused, getPlayer, getAudioApi} = storeToRefs(store)
 
 
 // class
@@ -104,6 +104,7 @@ const onVinylClick = (idx, nowPlaying) => {
         if(getIsPaused.value){
             play()
             setVinylState(idx)
+            getAudioApi.value.connectSource(getPlayer.value)
         }else{
             stop()
             resetVinylState()
@@ -114,6 +115,7 @@ const onVinylClick = (idx, nowPlaying) => {
         stop()
         play()
         setVinylState(idx)
+        getAudioApi.value.connectSource(getPlayer.value)
 
     }
 }

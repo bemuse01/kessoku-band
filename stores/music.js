@@ -28,6 +28,15 @@ export const useMusicStore = defineStore('music', () => {
         player.value.play()
     }
     const getIsPaused = computed(() => isPaused.value)
+    const getPlayer = computed(() => player.value)
+
+
+    // audio api
+    const audioApi = ref(null)
+    const getAudioApi = computed(() => audioApi.value)
+    const setAudioApi = (newAudioApi) => {
+        audioApi.value = newAudioApi
+    }
 
 
     return{
@@ -42,5 +51,10 @@ export const useMusicStore = defineStore('music', () => {
         playPlayer,
         setPlayerSrc,
         getIsPaused,
+        getPlayer,
+
+        // context
+        setAudioApi,
+        getAudioApi
     }
 })

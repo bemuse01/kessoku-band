@@ -3,29 +3,27 @@
         :class="classes.wrapper"
     >
 
-        <transition-group name="fade" >
+        <template v-if="isLoaded && !loadingContainerFlag">
+
+            <render-container />
+
+            <!-- <bg-container /> -->
+
+            <vinyl-container />
+
+            <playlist-container />
+
+        </template>
+
+        <transition name="fade">
 
             <loading-container 
-                v-if="!isLoaded || loadingContainerFlag" 
+                v-if="!isLoaded || loadingContainerFlag"
                 @loadingDone="onLoadingDone" 
                 @click="onClickLoadingContainer"
             />
 
-
-            <template v-else>
-
-                <render-container />
-
-                <!-- <bg-container /> -->
-
-                <vinyl-container />
-
-                <playlist-container />
-
-            </template>
-        
-    </transition-group>
-
+        </transition>
 
     </div>
 </template>
@@ -37,11 +35,13 @@ import PlaylistContainer from '~/components/playlist/PlaylistContainer.vue'
 import LoadingContainer from '~/components/loading/LoadingContainer.vue'
 import {useMusicStore} from '~/stores/music.js'
 import {storeToRefs} from 'pinia'
+import AudioApi from '~/assets/js/class/audio/audioApi.js'
+// import * as Tone from 'tone'
 
 
 // store
 const store = useMusicStore()
-const {} = store
+const {initPlayer, setAudioApi} = store
 const {getIdx, getPlayerState} = storeToRefs(store)
 
 
@@ -51,11 +51,19 @@ const classes = reactive({
 })
 
 
+// init audio
+const initAudio = () => {
+    initPlayer(new Audio())
+    setAudioApi(new AudioApi())
+}
+
+
 // loading
 const isLoaded = ref(false)
 const loadingContainerFlag = ref(true)
-const onClickLoadingContainer = () => {
+const onClickLoadingContainer = async () => {
     loadingContainerFlag.value = false
+    initAudio()
 }
 const onLoadingDone = () => {
     isLoaded.value = true
