@@ -7,8 +7,6 @@
 
             <render-container />
 
-            <!-- <bg-container /> -->
-
             <vinyl-container />
 
             <playlist-container />
