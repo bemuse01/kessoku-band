@@ -14,7 +14,10 @@ export const useMusicStore = defineStore('music', () => {
     // player
     const player = ref(null)
     const isPaused = ref(true)
-    const initPlayer = (audio) => player.value = audio 
+    const initPlayer = (audio) => {
+        player.value = audio
+        player.value.loop = true
+    } 
     const setPlayerSrc = (src) => player.value.src = src 
     const stopPlayer = () => {
         isPaused.value = true

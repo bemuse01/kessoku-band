@@ -5,9 +5,11 @@
 </template>
 
 <script setup>
-import musics from '~/assets/src/data/musics.json' 
+import musics from '~/assets/src/data/musics.json'
+import {getAudioPath} from '~/utils/method.file.js'
 import {useMusicStore} from '~/stores/music.js'
 import {storeToRefs} from 'pinia'
+import * as Tone from 'tone'
 
 
 // store
@@ -34,8 +36,22 @@ const {getIdx, isPaused} = storeToRefs(store)
 // })
 
 
+// const init = async () => {
+//     await Tone.start()
+
+//     const path = getAudioPath('rockn_roll.mp3')
+//     const player = new Tone.Player({loop: true, autostart: false}).toDestination()
+//     await player.load(path)
+
+//     player.start()
+// }
+
+
 // hook
-onMounted(() => initPlayer(new Audio()))
+onMounted(() => {
+    initPlayer(new Audio())
+    // window.addEventListener('click', () => init())
+})
 </script>
 
 <style scoped>

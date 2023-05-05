@@ -89,7 +89,7 @@ const updatePy = (direction) => {
 
 // player
 const musicPath = computed(() => getAudioPath(musics[getIdx.value].audio_filename))
-const play = (idx) => {
+const play = () => {
     setPlayerSrc(musicPath.value)
     playPlayer()
 }
@@ -102,7 +102,7 @@ const onVinylClick = (idx, nowPlaying) => {
     if(nowPlaying){
 
         if(getIsPaused.value){
-            play(idx)
+            play()
             setVinylState(idx)
         }else{
             stop()
@@ -112,7 +112,7 @@ const onVinylClick = (idx, nowPlaying) => {
     }else{
 
         stop()
-        play(idx)
+        play()
         setVinylState(idx)
 
     }
