@@ -39,7 +39,7 @@ const {nowPlaying, coverName} = toRefs(props)
 // class
 const classes = reactive({
     wrapper: 'w-full h-full flex justify-center items-center',
-    box: 'w-[75%] h-[75%] flex relative justify-center items-center rounded-[50%] drop-shadow-[0_25px_25px_rgba(0,0,0,0.5)] cursor-pointer',
+    box: 'w-[72%] h-[72%] flex relative justify-center items-center rounded-[50%] drop-shadow-[0_25px_25px_rgba(0,0,0,0.5)] cursor-pointer',
     img: 'w-full h-full absolute select-none',
     cover: 'w-[50%] h-[50%] absolute select-none',
     overlay: 'mix-blend-overlay rotate-[-40deg]'
@@ -50,7 +50,7 @@ const classes = reactive({
 const coverPath = computed(() => getImagePath(coverName.value))
 const bgPath = getImagePath('vinyl.png')
 const bgOverlayPath = getImagePath('vinyl_overlay.png')
-const animation = computed(() => nowPlaying.value ? 'rotating 10s linear infinite reverse' : 'none')
+const animation = computed(() => nowPlaying.value ? 'rotating 9s linear infinite reverse' : 'none')
 const animStyle = computed(() => ({animation: animation.value}))
 </script>
 
