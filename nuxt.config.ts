@@ -25,7 +25,8 @@ export default {
     vite: {
       assetsInclude: [
         '**/*.WAV', 
-        '**/*.wav'
+        '**/*.wav',
+        '**/*.webp'
       ]
     }
 }

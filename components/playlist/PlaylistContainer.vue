@@ -9,7 +9,7 @@ import musics from '~/assets/src/data/musics.json'
 import {getAudioPath} from '~/utils/method.file.js'
 import {useMusicStore} from '~/stores/music.js'
 import {storeToRefs} from 'pinia'
-import * as Tone from 'tone'
+// import * as Tone from 'tone'
 
 
 // store
