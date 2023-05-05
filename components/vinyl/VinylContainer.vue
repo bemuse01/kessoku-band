@@ -102,12 +102,16 @@ const onVinylClick = (idx, nowPlaying) => {
     if(nowPlaying){
 
         if(getIsPaused.value){
+
             play()
             setVinylState(idx)
             getAudioApi.value.connectSource(getPlayer.value)
+
         }else{
+
             stop()
             resetVinylState()
+
         }
 
     }else{
@@ -118,6 +122,7 @@ const onVinylClick = (idx, nowPlaying) => {
         getAudioApi.value.connectSource(getPlayer.value)
 
     }
+    
 }
 
 
