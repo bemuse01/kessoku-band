@@ -15,6 +15,8 @@
                     v-for="vinyl in vinyls"
                     :key="vinyl.key"
                     :coverName="vinyl.coverName"
+                    :nowPlaying="vinyl.nowPlaying"
+                    @click="() => onVinylClick(vinyl.key, vinyl.nowPlaying)"
                 >
 
                 </Vinyl>
@@ -28,6 +30,7 @@
 
 <script setup>
 // import {GLOBAL_DEGREE} from '~/utils/const.js'
+import {getAudioPath} from '~/utils/method.file.js'
 import Method from '~/utils/method.math.js'
 import Vinyl from './Vinyl.vue'
 import musics from '~/assets/src/data/musics.json'
@@ -37,8 +40,8 @@ import {storeToRefs} from 'pinia'
 
 // store
 const store = useMusicStore()
-const {setIdx} = store
-const {getIdx} = storeToRefs(store)
+const {setIdx, playPlayer, stopPlayer, setPlayerSrc} = store
+const {getIdx, getIsPaused} = storeToRefs(store)
 
 
 // class
@@ -53,8 +56,19 @@ const classes = reactive({
 // vinyls
 const vinyls = ref(musics.map(music => ({
     key: music.id,
-    coverName: music.cover_filename
+    coverName: music.cover_filename,
+    nowPlaying: false,
+    rotate: false
 })))
+const setVinylState = (key) => {
+    vinyls.value.forEach(vinyl => {
+        if(vinyl.key === key) vinyl.nowPlaying = true
+        else vinyl.nowPlaying = false
+    })
+}
+const resetVinylState = () => {
+    vinyls.value.forEach(vinyl => vinyl.nowPlaying = false)
+}
 
 
 // scroll
@@ -70,6 +84,38 @@ const updatePy = (direction) => {
     setIdx(direction, 0, vinyls.value.length - 1)
 
     py.value = getIdx.value * 100
+}
+
+
+// player
+const musicPath = computed(() => getAudioPath(musics[getIdx.value].audio_filename))
+const play = (idx) => {
+    setPlayerSrc(musicPath.value)
+    playPlayer()
+}
+const stop = () => {
+    stopPlayer()
+}
+const onVinylClick = (idx, nowPlaying) => {
+
+    // nowPlaying: 현재 재생중인 비닐 이외의 다른 비닐을 클릭 했을 때 rotate를 멈추기 위한 property
+    if(nowPlaying){
+
+        if(getIsPaused.value){
+            play(idx)
+            setVinylState(idx)
+        }else{
+            stop()
+            resetVinylState()
+        }
+
+    }else{
+
+        stop()
+        play(idx)
+        setVinylState(idx)
+
+    }
 }
 
 

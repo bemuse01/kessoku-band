@@ -87,27 +87,7 @@ const slideBg = () => {
     const key = addBg()
     createTween(key)
 }
-// const bgs = ref(Array.from({length: 2}, (_, key) => ({
-//     key,
-//     show: key === 0 ? true : false,
-//     style: {
-//         background: musics[getIdx.value].color
-//     }
-// })))
-// const changeBg = () => {
-    // bgs.value.forEach(bg => {
-    //     if(bg.show === true){
-    //         bg.show = false
-    //     }else{
-    //         bg.show = true
-    //         bg.style.background = musics[getIdx.value].color
-    //     }
-    // })
-// }
-onMounted(() => slideBg())
 watch(getIdx, debounce(function(cur, pre){
-    // console.log(cur)
-    // changeBg()
     slideBg()
 }, delay))
 </script>
