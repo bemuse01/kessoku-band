@@ -3,22 +3,26 @@
         :class="classes.wrapper"
     >
 
-        <template v-if="isLoaded && !loadingContainerFlag">
+        <template v-if="isLoaded && !loadingBoxFlag">
 
-            <render-container />
+            <bg-box-1 />
 
-            <vinyl-container />
+            <title-box />
 
-            <playlist-container />
+            <render-box />
+
+            <bg-box-2 />
+
+            <vinyl-box />
 
         </template>
 
         <transition name="fade">
 
-            <loading-container 
-                v-if="!isLoaded || loadingContainerFlag"
+            <loading-box
+                v-if="!isLoaded || loadingBoxFlag"
                 @loadingDone="onLoadingDone" 
-                @click="onClickLoadingContainer"
+                @click="onClickLoadingBox"
             />
 
         </transition>
@@ -27,25 +31,26 @@
 </template>
 
 <script setup>
-import RenderContainer from '~/components/babylon/RenderContainer.vue'
-import VinylContainer from '~/components/vinyl/VinylContainer.vue'
-import PlaylistContainer from '~/components/playlist/PlaylistContainer.vue'
-import LoadingContainer from '~/components/loading/LoadingContainer.vue'
+// import LayerContainer from '~/components/public/LayerContainer.vue'
+import RenderBox from '~/components/babylon/RenderBox.vue'
+import BgBox1 from '~/components/bg/BgBox1.vue'
+import BgBox2 from '~/components/bg/BgBox2.vue'
+import VinylBox from '~/components/music/VinylBox.vue'
+import TitleBox from '~/components/music/TitleBox.vue'
+// import PlaylistContainer from '~/components/playlist/PlaylistContainer.vue'
+import LoadingBox from '~/components/loading/LoadingBox.vue'
 import {useMusicStore} from '~/stores/music.js'
-import {storeToRefs} from 'pinia'
 import AudioApi from '~/assets/js/class/audio/audioApi.js'
-// import * as Tone from 'tone'
 
 
 // store
 const store = useMusicStore()
 const {initPlayer, setAudioApi} = store
-const {getIdx, getPlayerState} = storeToRefs(store)
 
 
 // class
 const classes = reactive({
-    wrapper: 'relative w-full h-full'
+    wrapper: 'relative w-[100vw] h-[100vh]'
 })
 
 
@@ -58,9 +63,9 @@ const initAudio = () => {
 
 // loading
 const isLoaded = ref(false)
-const loadingContainerFlag = ref(true)
-const onClickLoadingContainer = async () => {
-    loadingContainerFlag.value = false
+const loadingBoxFlag = ref(true)
+const onClickLoadingBox = async () => {
+    loadingBoxFlag.value = false
     initAudio()
 }
 const onLoadingDone = () => {
