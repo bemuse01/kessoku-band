@@ -14,11 +14,11 @@
 }
 .fade-y-enter-from{
   opacity: 0;
-  transform: translateY(-18%);
+  transform: translateY(-10%);
 }
 .fade-y-leave-to {
   opacity: 0;
-  transform: translateY(18%);
+  transform: translateY(10%);
 }
 
 
