@@ -45,6 +45,15 @@ export default class{
     }
 
 
+    // event
+    show(){
+        
+    }
+    hide(){
+
+    }
+
+
     // init
     init(){
         this.create()

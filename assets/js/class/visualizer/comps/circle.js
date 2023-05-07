@@ -38,7 +38,7 @@ export default class{
 
         this.circle = new Circle({
             geometryOpt: {
-                radius: radius,
+                radius: 1,
                 tessellation: seg,
                 updatable: true
             },
@@ -47,6 +47,8 @@ export default class{
         })
 
         this.circle.get().rotation.z = -120 * RADIAN
+        this.circle.get().scaling.x = radius
+        this.circle.get().scaling.y = radius
 
         this.oPosition = [...this.circle.getVerticesData('position')]
     }
