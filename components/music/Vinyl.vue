@@ -42,15 +42,40 @@ const classes = reactive({
 
 // box
 const boxScale = computed(() => nowPlaying.value ? '0.66' : `${VINYL_SCALE}`)
-const boxStyle = computed(() => ({transition: 'transform 0.6s', transform: `scale(${boxScale.value})`}))
+const boxStyle = computed(() => ({transition: 'transform 0.5s', transform: `scale(${boxScale.value})`}))
 
 
 // vinyl bg
 const coverPath = computed(() => getImagePath(coverName.value))
 const bgPath = getImagePath('vinyl.png')
 const bgOverlayPath = getImagePath('vinyl_overlay.png')
-const animation = computed(() => nowPlaying.value ? 'rotating 9s linear infinite reverse' : 'none')
+const animation = computed(() => nowPlaying.value ? 'rotating 9s linear infinite reverse forwards' : 'none')
 const animStyle = computed(() => ({animation: animation.value}))
+// const rotation = ref(0)
+// const time = 9
+// const degStep = 6 / time
+// const animStyle = computed(() => ({transform: `rotate(${rotation.value}deg)`}))
+// const animation = ref(null)
+// const animateVinyl = () => {
+//     rotation.value = (rotation.value + degStep) % 360
+// }
+// watch(nowPlaying, (cur, pre) => {
+//     if(cur) animate()
+//     else cancelAnimationFrame(animation.value)
+// })
+
+
+// method
+const animate = () => {
+    animateVinyl()
+    animation.value = requestAnimationFrame(() => animate())
+}
+
+
+// hook
+onMounted(() => {
+
+})
 </script>
 
 <style scoped>
