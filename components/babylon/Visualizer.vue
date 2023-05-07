@@ -3,7 +3,14 @@
 </template>
 
 <script setup>
-import Wave from '~/assets/js/class/visualizer/visualizer.js'
+import Visualizer from '~/assets/js/class/visualizer/visualizer.js'
+import {useMusicStore} from '~/stores/music.js'
+import {storeToRefs} from 'pinia'
+
+
+// store
+const store = useMusicStore()
+const {getAudioApi} = storeToRefs(store)
 
 
 // props
@@ -14,12 +21,12 @@ const {engine} = toRefs(props)
 
 
 // object
-let wave = null
+let visualizer = null
 const createObject = () => {
-    wave = new Wave({engine: engine.value})
+    visualizer = new Visualizer({engine: engine.value, audio: getAudioApi.value})
 }
 const resizeObject = () => {
-    wave.resize()
+    visualizer.resize()
 }
 
 

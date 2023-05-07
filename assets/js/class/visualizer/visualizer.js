@@ -1,7 +1,8 @@
 import Method from '~/utils/method.math.js'
 import * as BABYLON from 'babylonjs'
+import Spline from '~/utils/cubic-spline.js'
 
-import Quad from './comps/quad.js'
+import Circle from './comps/circle.js'
 
 export default class{
     constructor({engine, audio, color}){
@@ -18,13 +19,22 @@ export default class{
         this.vw = null
         this.vh = null
         
+        this.count = 120
+        this.splineSmooth = 0.6
+        this.spilneAvgBoost = 1.15
+        this.xs = Array.from({length: this.count}, (_, i) => i * 1)
+        this.audioData = null
+        this.audioOffset = ~~(this.audio.fft / 2 * 0.4)
+        this.audioDataLen = this.audio.fft / 2 - this.audioOffset
+        this.audioStep = ~~(this.audioDataLen / this.count)
         // const radius = 25
         // const color = BABYLON.Color3.FromHexString('#66faff')
         // const audioBoost = 35
 
         this.params = [
             {
-                module: Quad
+                module: Circle,
+                seg: this.count,
             }
         ]
         this.comps = []
@@ -82,6 +92,7 @@ export default class{
     render(){
         this.engine.runRenderLoop(() => {
             this.renderScene()
+            this.updateAudioData()
             this.animateComps()
         })
     }
@@ -89,11 +100,47 @@ export default class{
         this.scene.render()
     }
     animateComps(){
-        // const {audioData} = this.audio
-
         this.comps.forEach(comp => {
-            if(comp.animate) comp.animate()
+            if(comp.animate) comp.animate(this.audioData)
         })
+    }
+
+
+    // audio
+    updateAudioData(){
+        const {audioData} = this.audio
+
+        if(audioData.length === 0) return
+
+        const stepData = this.createStepAudioData(audioData)
+        this.audioData = this.createSplinedAudioData(stepData)
+    }
+    createStepAudioData(audioData){
+        return Array.from({length: this.count}, (_, i) => audioData[~~(this.audioOffset / 2) + i * this.audioStep] / 255)
+    }
+    createSplinedAudioData(audioData){
+        const len = audioData.length
+        const ats = []
+
+        const xs = this.xs
+        const ys = audioData
+        // ys[0] = 0
+
+        const spline = new Spline(xs, ys)
+        
+        for(let i = 0; i < len; i++){
+            ats.push(spline.at(i * this.splineSmooth))
+        }
+        
+        // const hats = ats.slice(0, ats.length / 2)
+        const avg = (ats.reduce((p, c) => p + c) / len) * this.spilneAvgBoost
+        const temp = ats.map((e, i) => Math.max(0, e - avg))
+
+        // const reverse = [...temp]
+        // reverse.reverse()
+
+        // return [...temp, ...reverse]
+        return temp
     }
 
 

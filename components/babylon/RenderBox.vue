@@ -3,8 +3,6 @@
         :class="classes.container"
     >
 
-        <!-- <render-bg-right /> -->
-        
         <div 
             :class="classes.canvasBox"
         >
@@ -20,20 +18,16 @@
             :class="classes.objectBox"
         >
 
-            <!-- <visualizer :engine="engine" /> -->
+            <visualizer :engine="engine" />
 
         </div>
-
-        <!-- <render-bg-left /> -->
 
     </div>
 </template>
 
 <script setup>
 import {Engine} from 'babylonjs'
-// import Visualizer from './Visualizer.vue'
-// import RenderBgRight from './RenderBgRight.vue'
-// import RenderBgLeft from './RenderBgLeft.vue'
+import Visualizer from './Visualizer.vue'
 
 
 // class

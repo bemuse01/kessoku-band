@@ -80,9 +80,7 @@ const scrollStyle = computed(() => ({transform: `translateY(-${cy.value}%)`}))
 const updateCy = () => {
     cy.value = Method.lerp(cy.value, py.value, lerpVelocity)
 }
-const updatePy = (direction) => {
-    setIdx(direction, 0, vinyls.value.length - 1)
-
+const updatePy = () => {
     py.value = getIdx.value * 100
 }
 
@@ -128,8 +126,11 @@ const onVinylClick = (idx, nowPlaying) => {
 
 // method
 const onMouseWheel = (e) => {
+    if(!getIsPaused.value) return
+
     const direction = Math.sign(e.deltaY)
 
+    setIdx(direction, 0, vinyls.value.length - 1)
     updatePy(direction)
 }
 const animate = () => {
