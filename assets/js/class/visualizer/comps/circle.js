@@ -46,7 +46,7 @@ export default class{
             engine
         })
 
-        this.circle.get().rotation.z = -120 * RADIAN
+        this.circle.get().rotation.z = -(90 + 15) * RADIAN
         this.circle.get().scaling.x = radius
         this.circle.get().scaling.y = radius
 

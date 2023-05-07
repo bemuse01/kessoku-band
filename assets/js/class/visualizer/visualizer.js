@@ -36,7 +36,7 @@ export default class{
         this.params = [
             {
                 module: Circle,
-                seg: 360,
+                seg: this.count * 4,
             }
         ]
         this.comps = []
