@@ -1,4 +1,5 @@
 const RADIAN = Math.PI / 180
 const GLOBAL_DEGREE = 15
+const VINYL_SCALE = 0.72
 
 export {RADIAN, GLOBAL_DEGREE}
