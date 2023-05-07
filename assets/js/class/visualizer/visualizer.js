@@ -20,13 +20,15 @@ export default class{
         this.vh = null
         
         this.count = 120
-        this.splineSmooth = 0.6
-        this.spilneAvgBoost = 1.15
+        this.splineSmooth = 0.2
+        // this.spilneAvgBoost = 1.15
+        this.spilneAvgBoost = 1.0
         this.xs = Array.from({length: this.count}, (_, i) => i * 1)
-        this.audioData = null
+        this.audioData = []
         this.audioOffset = ~~(this.audio.fft / 2 * 0.4)
         this.audioDataLen = this.audio.fft / 2 - this.audioOffset
         this.audioStep = ~~(this.audioDataLen / this.count)
+
         // const radius = 25
         // const color = BABYLON.Color3.FromHexString('#66faff')
         // const audioBoost = 35
@@ -34,7 +36,7 @@ export default class{
         this.params = [
             {
                 module: Circle,
-                seg: this.count,
+                seg: 360,
             }
         ]
         this.comps = []
@@ -112,7 +114,7 @@ export default class{
 
         if(audioData.length === 0) return
 
-        const stepData = this.createStepAudioData(audioData)
+        const stepData = this.createStepAudioData([...audioData])
         this.audioData = this.createSplinedAudioData(stepData)
     }
     createStepAudioData(audioData){
@@ -124,7 +126,7 @@ export default class{
 
         const xs = this.xs
         const ys = audioData
-        // ys[0] = 0
+        ys[0] = 0
 
         const spline = new Spline(xs, ys)
         
@@ -136,11 +138,11 @@ export default class{
         const avg = (ats.reduce((p, c) => p + c) / len) * this.spilneAvgBoost
         const temp = ats.map((e, i) => Math.max(0, e - avg))
 
-        // const reverse = [...temp]
-        // reverse.reverse()
+        const reverse = [...temp]
+        reverse.reverse()
 
-        // return [...temp, ...reverse]
-        return temp
+        return [...temp, ...reverse]
+        // return temp
     }
 
 

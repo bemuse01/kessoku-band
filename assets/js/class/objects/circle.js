@@ -61,4 +61,10 @@ export default class{
     disposeMaterial(){
         this.mesh.material.dispose()
     }
+
+
+    // update
+    updateVerticesData(name, data){
+        this.mesh.updateVerticesData(name, data)
+    }
 }

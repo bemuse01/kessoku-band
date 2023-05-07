@@ -5,7 +5,7 @@ export default class{
         this.source = null
 
         this.fft = 2 ** 14
-        this.smoothingTimeConstant = 0.65
+        this.smoothingTimeConstant = 0.4
         this.audioData = []
 
         this.init()
@@ -25,6 +25,7 @@ export default class{
         this.context = new AudioContext()
 
         this.analyser = this.context.createAnalyser()
+        this.analyser.fftSize = this.fft
         this.analyser.smoothingTimeConstant = this.smoothingTimeConstant
     }
     connectSource(audio){

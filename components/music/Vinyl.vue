@@ -40,7 +40,7 @@ const {nowPlaying, coverName} = toRefs(props)
 // class
 const classes = reactive({
     wrapper: 'w-full h-full flex justify-center items-center',
-    box: 'w-full h-full flex relative justify-center items-center rounded-[50%] drop-shadow-[0_30px_25px_rgba(0,0,0,0.7)] cursor-pointer',
+    box: 'w-full h-full flex relative justify-center items-center rounded-[50%] drop-shadow-[0_30px_25px_rgba(0,0,0,0.75)] cursor-pointer',
     img: 'w-full h-full absolute select-none',
     cover: 'w-[50%] h-[50%] absolute select-none',
     overlay: 'mix-blend-overlay rotate-[-40deg]'
