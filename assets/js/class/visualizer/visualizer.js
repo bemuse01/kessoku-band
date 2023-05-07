@@ -47,10 +47,14 @@ export default class{
 
     // event
     show(){
-
+        this.comps.forEach(comp => {
+            if(comp.show) comp.show()
+        })
     }
     hide(){
-
+        this.comps.forEach(comp => {
+            if(comp.hide) comp.hide()
+        })
     }
 
 

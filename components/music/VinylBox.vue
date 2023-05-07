@@ -5,6 +5,7 @@
         
         <div
             :class="classes.box"
+            :style="boxStyle"
         >
             <div
                 :class="classes.scroll"
@@ -29,7 +30,7 @@
 </template>
 
 <script setup>
-// import {GLOBAL_DEGREE} from '~/utils/const.js'
+import {GLOBAL_DEGREE} from '~/utils/const.js'
 import {getAudioPath} from '~/utils/method.file.js'
 import Method from '~/utils/method.math.js'
 import Vinyl from './Vinyl.vue'
@@ -47,10 +48,14 @@ const {getIdx, getIsPaused, getPlayer, getAudioApi} = storeToRefs(store)
 // class
 const classes = reactive({
     container: 'absolute overflow-hidden w-[100vw] h-[100vh] flex justify-center items-center',
-    box: 'w-[100vh] aspect-square rotate-[15deg]',
+    box: 'w-[100vh] aspect-square',
     scroll: 'w-full h-full',
     item: 'w-full h-full bg-[rgba(255,0,0,0.5)] rounded-[25%]'
 })
+
+
+// box
+const boxStyle = computed(() => ({transform: `rotate(${GLOBAL_DEGREE}deg)`}))
 
 
 // vinyls

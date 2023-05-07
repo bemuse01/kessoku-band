@@ -1,5 +1,6 @@
 import Circle from '../../objects/circle.js'
-import {RADIAN} from '~/utils/const.js'
+import {RADIAN, VINYL_SCALE} from '~/utils/const.js'
+import Method from '~/utils/method.math.js'
 
 export default class{
     constructor({
@@ -7,18 +8,20 @@ export default class{
         scene,
         camera,
         seg,
-        vw,
         vh
     }){
         this.engine = engine
         this.scene = scene
         this.camera = camera
         this.seg = seg
-        this.vw = vw
         this.vh = vh
 
         this.boost = 0.5
         this.oPosition = []
+
+        this.lerpVelocity = 0.11
+        this.cv = 0
+        this.pv = 0
 
         this.init()
     }
@@ -34,7 +37,7 @@ export default class{
     create(){
         const {engine, scene, seg, vh} = this
 
-        const radius = vh / 2 * 0.72
+        const radius = vh / 2 * VINYL_SCALE
 
         this.circle = new Circle({
             geometryOpt: {
@@ -54,8 +57,29 @@ export default class{
     }
 
 
+    // event
+    show(){
+        this.pv = 1
+    }
+    hide(){
+        this.pv = 0
+    }
+
+
+    // resize
+    resize({vh}){
+        this.vh = vh
+    }
+
+
     // animate
     animate(audioData){
+        this.cv = Method.lerp(this.cv, this.pv, this.lerpVelocity)
+
+        this.updateCirclePosition(audioData)
+        this.updateCircleScale()
+    }
+    updateCirclePosition(audioData){
         const {oPosition, boost} = this
 
         const position = this.circle.getVerticesData('position')
@@ -70,5 +94,9 @@ export default class{
         }
 
         this.circle.updateVerticesData('position', position)
+    }
+    updateCircleScale(){
+        const material = this.circle.getMaterial()
+        material.alpha = this.cv
     }
 }

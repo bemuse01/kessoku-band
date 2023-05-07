@@ -10,7 +10,7 @@ import {storeToRefs} from 'pinia'
 
 // store
 const store = useMusicStore()
-const {getAudioApi} = storeToRefs(store)
+const {getAudioApi, getIsPaused} = storeToRefs(store)
 
 
 // props
@@ -28,6 +28,10 @@ const createObject = () => {
 const resizeObject = () => {
     visualizer.resize()
 }
+watch(getIsPaused, (cur, pre) => {
+    if(cur) visualizer.hide()
+    else visualizer.show()
+})
 
 
 // engine

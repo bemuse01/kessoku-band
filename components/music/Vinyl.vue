@@ -18,15 +18,8 @@
 </template>
 
 <script setup>
-import {getImagePath, getAudioPath} from '~/utils/method.file.js'
-import {useMusicStore} from '~/stores/music.js'
-import {storeToRefs} from 'pinia'
-
-
-// store
-const store = useMusicStore()
-const {setIdx, playPlayer, stopPlayer, setPlayerSrc} = store
-const {getIdx, getIsPaused} = storeToRefs(store)
+import {getImagePath} from '~/utils/method.file.js'
+import {VINYL_SCALE} from '~/utils/const.js'
 
 
 // props
@@ -48,8 +41,8 @@ const classes = reactive({
 
 
 // box
-const boxScale = computed(() => nowPlaying.value ? '0.66' : '0.72')
-const boxStyle = computed(() => ({transition: 'transform 0.4s', transform: `scale(${boxScale.value})`}))
+const boxScale = computed(() => nowPlaying.value ? '0.66' : `${VINYL_SCALE}`)
+const boxStyle = computed(() => ({transition: 'transform 0.6s', transform: `scale(${boxScale.value})`}))
 
 
 // vinyl bg
