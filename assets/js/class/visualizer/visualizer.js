@@ -20,7 +20,7 @@ export default class{
         this.vh = null
         
         this.count = 120
-        this.splineSmooth = 0.2
+        this.splineSmooth = 0.25
         // this.spilneAvgBoost = 1.15
         this.spilneAvgBoost = 1.0
         this.xs = Array.from({length: this.count}, (_, i) => i * 1)
@@ -47,7 +47,7 @@ export default class{
 
     // event
     show(){
-        
+
     }
     hide(){
 
