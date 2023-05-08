@@ -7,6 +7,8 @@
 
             <bg-box-1 />
 
+            <video-box />
+
             <title-box />
 
             <render-box />
@@ -37,6 +39,7 @@ import BgBox1 from '~/components/bg/BgBox1.vue'
 import BgBox2 from '~/components/bg/BgBox2.vue'
 import VinylBox from '~/components/music/VinylBox.vue'
 import TitleBox from '~/components/music/TitleBox.vue'
+import VideoBox from '~/components/bg/VideoBox.vue'
 // import PlaylistContainer from '~/components/playlist/PlaylistContainer.vue'
 import LoadingBox from '~/components/loading/LoadingBox.vue'
 import {useMusicStore} from '~/stores/music.js'

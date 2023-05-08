@@ -11,5 +11,10 @@ const getAudioPath = (name) => {
     const getImageAbsolutePath = imageName => glob[`/assets/src/audio/${imageName}`]['default']
     return getImageAbsolutePath(name)
 }
+const getVideoPath = (name) => {
+    const glob = import.meta.glob('~/assets/src/video/*', {eager: true})
+    const getImageAbsolutePath = imageName => glob[`/assets/src/video/${imageName}`]['default']
+    return getImageAbsolutePath(name)
+}
 
-export {getImagePath, getImageGlob, getAudioPath}
+export {getImagePath, getImageGlob, getAudioPath, getVideoPath}

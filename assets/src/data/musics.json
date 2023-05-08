@@ -6,6 +6,7 @@
         "artist_jp": "結束バンド",
         "title_jp": "青春コンプレックス",
         "audio_filename": "seisyun_complex.mp3",
+        "video_filename": "",
         "cover_filename": "seisyun_complex.jpg",
         "color": "#7f1fe5"
     },
@@ -16,6 +17,7 @@
         "artist_jp": "結束バンド",
         "title_jp": "Distortion!!",
         "audio_filename": "distortion.mp3",
+        "video_filename": "",
         "cover_filename": "distortion.jpg",
         "color": "#e81a5b"
     },
@@ -26,6 +28,7 @@
         "artist_jp": "結束バンド",
         "title_jp": "カラカラ",
         "audio_filename": "karakara.mp3",
+        "video_filename": "",
         "cover_filename": "karakara.jpg",
         "color": "#1a7cc3"
     },
@@ -36,6 +39,7 @@
         "artist_jp": "結束バンド",
         "title_jp": "ギターと孤独と蒼い惑星",
         "audio_filename": "g_l_b.mp3",
+        "video_filename": "g_l_b.mp4",
         "cover_filename": "g_l_b.jpg",
         "color": "#ed709a"
     },
@@ -46,6 +50,7 @@
         "artist_jp": "結束バンド",
         "title_jp": "あのバンド",
         "audio_filename": "that_band.mp3",
+        "video_filename": "that_band.mp4",
         "cover_filename": "that_band.jpg",
         "color": "#1a7cc3"
     },
@@ -56,6 +61,7 @@
         "artist_jp": "結束バンド",
         "title_jp": "なにが悪い",
         "audio_filename": "what_is_wrong.mp3",
+        "video_filename": "",
         "cover_filename": "what_is_wrong.jpg",
         "color": "#f7b41b"
     },
@@ -66,6 +72,7 @@
         "artist_jp": "結束バンド",
         "title_jp": "忘れてやらない",
         "audio_filename": "never_forget.mp3",
+        "video_filename": "never_forget.mp4",
         "cover_filename": "never_forget.jpg",
         "color": "#f7b41b"
     },
@@ -76,6 +83,7 @@
         "artist_jp": "結束バンド",
         "title_jp": "星座になれたら",
         "audio_filename": "constellation.mp3",
+        "video_filename": "constellation.mp4",
         "cover_filename": "constellation.jpg",
         "color": "#e81a5b"
     },
@@ -86,6 +94,7 @@
         "artist_jp": "結束バンド",
         "title_jp": "転がる岩, 君に朝が降る",
         "audio_filename": "rockn_roll.mp3",
+        "video_filename": "",
         "cover_filename": "rockn_roll.jpg",
         "color": "#ed709a"
     },
@@ -96,6 +105,7 @@
         "artist_jp": "結束バンド",
         "title_jp": "フラッシュバッカー",
         "audio_filename": "flashbacker.mp3",
+        "video_filename": "flashbacker.mp4",
         "cover_filename": "default.jpg",
         "color": "#ed709a"
     }

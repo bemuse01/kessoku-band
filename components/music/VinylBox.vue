@@ -8,8 +8,8 @@
             :style="boxStyle"
         >
             <div
-                :class="classes.scroll"
-                :style="scrollStyle"
+                :class="classes.wheel"
+                :style="wheelStyle"
             >
 
                 <Vinyl
@@ -31,7 +31,7 @@
 
 <script setup>
 import {GLOBAL_DEGREE} from '~/utils/const.js'
-import {getAudioPath} from '~/utils/method.file.js'
+import {getAudioPath, getVideoPath} from '~/utils/method.file.js'
 import Method from '~/utils/method.math.js'
 import Vinyl from './Vinyl.vue'
 import musics from '~/assets/src/data/musics.json'
@@ -41,7 +41,7 @@ import {storeToRefs} from 'pinia'
 
 // store
 const store = useMusicStore()
-const {setIdx, playAudio, stopAudio, setAudioSrc, connectSource} = store
+const {setIdx, playAudio, stopAudio, setAudioSrc, connectSource, playVideo, stopVideo, setVideoSrc} = store
 const {getIdx, getIsPaused} = storeToRefs(store)
 
 
@@ -49,7 +49,7 @@ const {getIdx, getIsPaused} = storeToRefs(store)
 const classes = reactive({
     container: 'absolute overflow-hidden w-[100vw] h-[100vh] flex justify-center items-center',
     box: 'w-[100vh] aspect-square',
-    scroll: 'w-full h-full',
+    wheel: 'w-full h-full',
     item: 'w-full h-full bg-[rgba(255,0,0,0.5)] rounded-[25%]'
 })
 
@@ -76,11 +76,11 @@ const resetVinylState = () => {
 }
 
 
-// scroll
+// wheel
 const lerpVelocity = 0.11
 const cy = ref(0)
 const py = ref(0)
-const scrollStyle = computed(() => ({transform: `translateY(-${cy.value}%)`}))
+const wheelStyle = computed(() => ({transform: `translateY(-${cy.value}%)`}))
 const updateCy = () => {
     cy.value = Method.lerp(cy.value, py.value, lerpVelocity)
 }
@@ -90,13 +90,31 @@ const updatePy = () => {
 
 
 // player
+const hasVideo = computed(() => musics[getIdx.value].video_filename === '' ? false : true)
+const videoPath = computed(() => getVideoPath(musics[getIdx.value].video_filename))
 const musicPath = computed(() => getAudioPath(musics[getIdx.value].audio_filename))
 const play = () => {
-    setAudioSrc(musicPath.value)
-    playAudio()
+    if(hasVideo.value){
+        setVideoSrc(videoPath.value)
+        playVideo()
+    }else{
+        setAudioSrc(musicPath.value)
+        playAudio()
+    }
 }
 const stop = () => {
-    stopAudio()
+    if(hasVideo.value){
+        stopVideo()
+    }else{
+        stopAudio()
+    }
+}
+const connect = () => {
+    if(hasVideo.value){
+        connectSource('video')
+    }else{
+        connectSource('audio')
+    }
 }
 const onVinylClick = (idx, nowPlaying) => {
 
@@ -107,7 +125,7 @@ const onVinylClick = (idx, nowPlaying) => {
 
             play()
             setVinylState(idx)
-            connectSource()
+            connect()
 
         }else{
 
@@ -121,7 +139,7 @@ const onVinylClick = (idx, nowPlaying) => {
         stop()
         play()
         setVinylState(idx)
-        connectSource()
+        connect()
 
     }
     

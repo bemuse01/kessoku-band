@@ -26,7 +26,8 @@ export default {
       assetsInclude: [
         '**/*.WAV', 
         '**/*.wav',
-        '**/*.webp'
+        '**/*.webp',
+        '**/*.mp4'
       ]
     }
 }

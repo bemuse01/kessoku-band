@@ -5,10 +5,11 @@ import Spline from '~/utils/cubic-spline.js'
 import Circle from './comps/circle.js'
 
 export default class{
-    constructor({engine, player, color}){
+    constructor({engine, player, color, mediaType}){
         this.engine = engine
         this.player = player
         this.color = color
+        this.mediaType = mediaType
 
         this.scene = null
         this.camera = null
@@ -55,6 +56,9 @@ export default class{
         this.comps.forEach(comp => {
             if(comp.hide) comp.hide()
         })
+    }
+    setMediaType(mediaType){
+        this.mediaType = mediaType
     }
 
 
@@ -123,11 +127,13 @@ export default class{
 
     // audio
     updateAudioData(){
-        const {audioData} = this.player
+        const {audioData, videoData} = this.player
 
-        if(audioData.length === 0) return
+        const data = this.mediaType === 'audio' ? audioData : videoData
 
-        const stepData = this.createStepAudioData([...audioData])
+        if(data.length === 0) return
+
+        const stepData = this.createStepAudioData([...data])
         this.audioData = this.createSplinedAudioData(stepData)
     }
     createStepAudioData(audioData){
