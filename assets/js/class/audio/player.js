@@ -36,6 +36,7 @@ export default class{
     // audio
     createAudio(){
         this.audio = new Audio()
+        this.audio.loop = true
     }
     getIsPaused(){
         return this.isPaused
