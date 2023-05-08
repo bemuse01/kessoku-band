@@ -83,7 +83,6 @@ export default class{
         this.media[type].fadeOutFlag = true
     }
     setSrc(type, src){
-        console.log(type, src)
         this.media[type].el.src = src
     }
 

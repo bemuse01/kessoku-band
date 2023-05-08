@@ -52,7 +52,7 @@ const initVideo = () => {
 }
 const showVideo = () => {
     if(!hasVideo.value) return
-    po.value = 0.6
+    po.value = 0.5
     // video.value.play()
 }
 const hideVideo = () => {
