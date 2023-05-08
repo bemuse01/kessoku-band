@@ -21,14 +21,31 @@ export default class{
         this.videoSource = null
         this.videoAnalyser = null
 
+        this.media = {
+            audio: {
+                el: null,
+                fadeOutFlag: true,
+                fadeInFlag: false,
+                source: null,
+                analyser: null,
+                data: []
+            },
+            video: {
+                el: null,
+                fadeOutFlag: true,
+                fadeInFlag: false,
+                source: null,
+                analyser: null,
+                data: []
+            }
+        }
+
         this.lerpVelocity = 0.11
         this.cv = 0
         this.pv = 0
 
         this.fft = 2 ** 14
         this.smoothingTimeConstant = 0.4
-        this.audioData = []
-        this.videoData = []
 
         this.init()
     }
@@ -44,42 +61,30 @@ export default class{
 
     // media
     createAudio(){
-        this.audio = new Audio()
-        this.audio.loop = true
+        this.media.audio.el = new Audio()
+        this.media.audio.el.loop = true
+    }
+    setVideo(video){
+        this.media.video.el = video
     }
     getIsPaused(){
         return this.isPaused
     }
-    setAudioSrc(src){
-        this.audio.src = src
-    }
-    playAudio(){
+    play(type){
         this.isPaused = false
-        this.audio.play()
-        this.audioFadeInFlag = true
-        this.audioFadeOutFlag = false
+        this.media[type].el.play()
+        this.media[type].fadeInFlag = true
+        this.media[type].fadeOutFlag = false
     }
-    stopAudio(){
+    stop(type){
         this.isPaused = true
-        this.audioFadeInFlag = false
-        this.audioFadeOutFlag = true
+
+        this.media[type].fadeInFlag = false
+        this.media[type].fadeOutFlag = true
     }
-    setVideo(video){
-        this.video = video
-    }
-    setVideoSrc(src){
-        this.video.src = src
-    }
-    playVideo(){
-        this.isPaused = false
-        this.video.play()
-        this.videoFadeInFlag = true
-        this.videoFadeOutFlag = false
-    }
-    stopVideo(){
-        this.isPaused = true
-        this.videoFadeInFlag = false
-        this.videoFadeOutFlag = true
+    setSrc(type, src){
+        console.log(type, src)
+        this.media[type].el.src = src
     }
 
 
@@ -87,90 +92,64 @@ export default class{
     createContext(){
         this.context = new AudioContext()
 
-        this.audioAnalyser = this.context.createAnalyser()
-        this.audioAnalyser.fftSize = this.fft
-        this.audioAnalyser.smoothingTimeConstant = this.smoothingTimeConstant
-
-        this.videoAnalyser = this.context.createAnalyser()
-        this.videoAnalyser.fftSize = this.fft
-        this.videoAnalyser.smoothingTimeConstant = this.smoothingTimeConstant
-    }
-    connectSource(media){
-        switch(media){
-            case 'audio':
-                if(!this.audioSource){
-                    this.audioSource = this.context.createMediaElementSource(this.audio)
-                }
-
-                this.audioSource.connect(this.audioAnalyser)
-                this.audioAnalyser.connect(this.context.destination)
-                this.audioData = new Uint8Array(this.audioAnalyser.frequencyBinCount)
-                break
-            case 'video':
-                if(!this.videoSource){
-                    this.videoSource = this.context.createMediaElementSource(this.video)
-                }
-
-                this.videoSource.connect(this.videoAnalyser)
-                this.videoAnalyser.connect(this.context.destination)
-                this.videoData = new Uint8Array(this.videoAnalyser.frequencyBinCount)
-                break
-            default:
-                break
+        for(const key in this.media){
+            this.media[key].analyser = this.context.createAnalyser()
+            this.media[key].analyser.fftSize = this.fft
+            this.media[key].analyser.smoothingTimeConstant = this.smoothingTimeConstant
         }
+    }
+    connectSource(type){
+        const media = this.media[type]
+
+        if(!media.source){
+            media.source = this.context.createMediaElementSource(media.el)
+        }
+
+        media.source.connect(media.analyser)
+        media.analyser.connect(this.context.destination)
+        media.data = new Uint8Array(media.analyser.frequencyBinCount)
     }
 
 
     // animate
     animate(){
-        this.updateAudioData()
-        this.updateVideoData()
-        // this.updateAudioVolume()
-        this.fadeInVolume('audio')
-        this.fadeOutVolume('audio')
-        this.fadeInVolume('video')
-        this.fadeOutVolume('video')
+        for(const key in this.media){
+            this.updateData(this.media[key])
+            this.fadeInVolume(this.media[key])
+            this.fadeOutVolume(this.media[key])
+        }
 
         requestAnimationFrame(() => this.animate())
     }
-    updateAudioData(){
-        if(!this.audioSource) return
+    updateData(media){
+        if(!media.source) return
 
-        this.audioAnalyser.getByteFrequencyData(this.audioData)
-    }
-    updateVideoData(){
-        if(!this.videoSource) return
-
-        this.videoAnalyser.getByteFrequencyData(this.videoData)
+        media.analyser.getByteFrequencyData(media.data)
     }
     fadeInVolume(media){
-        if(!this[media]) return
+        if(!media.el) return
 
-        if(this[media + 'FadeInFlag']){
-            const volume = this[media].volume + this.volumeStep
-            this[media].volume = Method.clamp(volume, 0, 1)
+        if(media.fadeInFlag){
+            const volume = media.el.volume + this.volumeStep
+            media.el.volume = Method.clamp(volume, 0, 1)
 
-            if(this[media].volume >= this.masterVolume){
-                this[media + 'FadeInFlag'] = false
+            if(media.el.volume >= this.masterVolume){
+                media.fadeInFlag = false
             }
         }
     }
     fadeOutVolume(media){
-        if(!this[media]) return
+        if(!media.el) return
 
-        if(this[media + 'FadeOutFlag']){
-            const volume = this[media].volume - this.volumeStep
-            this[media].volume = Method.clamp(volume, 0, 1)
+        if(media.fadeOutFlag){
+            const volume = media.el.volume - this.volumeStep
+            media.el.volume = Method.clamp(volume, 0, 1)
 
-            if(this[media].volume <= 0){
-                this[media + 'FadeOutFlag'] = false
-                if(this.isStop) this[media].currentTime = 0
-                this[media].pause()
+            if(media.el.volume <= 0){
+                media.fadeOutFlag = false
+                if(this.isStop) media.el.currentTime = 0
+                media.el.pause()
             }
         }
-    }
-    updateAudioVolume(){
-        this.cv = Method.lerp(this.cv, this.pv, this.lerpVelocity)
-        this.audio.volume = this.cv
     }
 }

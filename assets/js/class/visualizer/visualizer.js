@@ -127,9 +127,9 @@ export default class{
 
     // audio
     updateAudioData(){
-        const {audioData, videoData} = this.player
+        const {media} = this.player
 
-        const data = this.mediaType === 'audio' ? audioData : videoData
+        const data = media[this.mediaType].data
 
         if(data.length === 0) return
 

@@ -41,7 +41,7 @@ import {storeToRefs} from 'pinia'
 
 // store
 const store = useMusicStore()
-const {setIdx, playAudio, stopAudio, setAudioSrc, connectSource, playVideo, stopVideo, setVideoSrc} = store
+const {setIdx, connectSource, setSrc, playMedia, stopMedia} = store
 const {getIdx, getIsPaused} = storeToRefs(store)
 
 
@@ -90,31 +90,23 @@ const updatePy = () => {
 
 
 // player
-const hasVideo = computed(() => musics[getIdx.value].video_filename === '' ? false : true)
+const mediaType = computed(() => musics[getIdx.value].video_filename === '' ? 'audio' : 'video')
 const videoPath = computed(() => getVideoPath(musics[getIdx.value].video_filename))
-const musicPath = computed(() => getAudioPath(musics[getIdx.value].audio_filename))
+const audioPath = computed(() => getAudioPath(musics[getIdx.value].audio_filename))
 const play = () => {
-    if(hasVideo.value){
-        setVideoSrc(videoPath.value)
-        playVideo()
+    if(mediaType.value === 'video'){
+        setSrc(mediaType.value, videoPath.value)
     }else{
-        setAudioSrc(musicPath.value)
-        playAudio()
+        setSrc(mediaType.value, audioPath.value)
     }
+
+    playMedia(mediaType.value)
 }
 const stop = () => {
-    if(hasVideo.value){
-        stopVideo()
-    }else{
-        stopAudio()
-    }
+    stopMedia(mediaType.value)
 }
 const connect = () => {
-    if(hasVideo.value){
-        connectSource('video')
-    }else{
-        connectSource('audio')
-    }
+    connectSource(mediaType.value)
 }
 const onVinylClick = (idx, nowPlaying) => {
 
