@@ -40,12 +40,12 @@ import TitleBox from '~/components/music/TitleBox.vue'
 // import PlaylistContainer from '~/components/playlist/PlaylistContainer.vue'
 import LoadingBox from '~/components/loading/LoadingBox.vue'
 import {useMusicStore} from '~/stores/music.js'
-import AudioApi from '~/assets/js/class/audio/audioApi.js'
+import Player from '~/assets/js/class/audio/player.js'
 
 
 // store
 const store = useMusicStore()
-const {initPlayer, setAudioApi} = store
+const {setPlayer} = store
 
 
 // class
@@ -56,8 +56,8 @@ const classes = reactive({
 
 // init audio
 const initAudio = () => {
-    initPlayer(new Audio())
-    setAudioApi(new AudioApi())
+    // initPlayer(new Audio())
+    setPlayer(new Player())
 }
 
 

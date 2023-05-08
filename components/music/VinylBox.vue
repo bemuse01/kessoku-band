@@ -41,8 +41,8 @@ import {storeToRefs} from 'pinia'
 
 // store
 const store = useMusicStore()
-const {setIdx, playPlayer, stopPlayer, setPlayerSrc} = store
-const {getIdx, getIsPaused, getPlayer, getAudioApi} = storeToRefs(store)
+const {setIdx, playAudio, stopAudio, setAudioSrc, connectSource} = store
+const {getIdx, getIsPaused} = storeToRefs(store)
 
 
 // class
@@ -78,7 +78,6 @@ const resetVinylState = () => {
 
 // scroll
 const lerpVelocity = 0.11
-const idx = ref(0)
 const cy = ref(0)
 const py = ref(0)
 const scrollStyle = computed(() => ({transform: `translateY(-${cy.value}%)`}))
@@ -93,11 +92,11 @@ const updatePy = () => {
 // player
 const musicPath = computed(() => getAudioPath(musics[getIdx.value].audio_filename))
 const play = () => {
-    setPlayerSrc(musicPath.value)
-    playPlayer()
+    setAudioSrc(musicPath.value)
+    playAudio()
 }
 const stop = () => {
-    stopPlayer()
+    stopAudio()
 }
 const onVinylClick = (idx, nowPlaying) => {
 
@@ -108,7 +107,7 @@ const onVinylClick = (idx, nowPlaying) => {
 
             play()
             setVinylState(idx)
-            getAudioApi.value.connectSource(getPlayer.value)
+            connectSource()
 
         }else{
 
@@ -122,7 +121,7 @@ const onVinylClick = (idx, nowPlaying) => {
         stop()
         play()
         setVinylState(idx)
-        getAudioApi.value.connectSource(getPlayer.value)
+        connectSource()
 
     }
     

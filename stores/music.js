@@ -13,30 +13,15 @@ export const useMusicStore = defineStore('music', () => {
 
     // player
     const player = ref(null)
-    const isPaused = ref(true)
-    const initPlayer = (audio) => {
-        player.value = audio
-        player.value.loop = true
-    } 
-    const setPlayerSrc = (src) => player.value.src = src 
-    const stopPlayer = () => {
-        isPaused.value = true
-        player.value.pause()
-    }
-    const playPlayer = () => {
-        isPaused.value = false
-        player.value.play()
-    }
-    const getIsPaused = computed(() => isPaused.value)
     const getPlayer = computed(() => player.value)
-
-
-    // audio api
-    const audioApi = ref(null)
-    const getAudioApi = computed(() => audioApi.value)
-    const setAudioApi = (newAudioApi) => {
-        audioApi.value = newAudioApi
+    const setPlayer = (newPlayer) => {
+        player.value = newPlayer
     }
+    const connectSource = () => player.value.connectSource()
+    const getIsPaused = computed(() => player.value.getIsPaused())
+    const setAudioSrc = (src) => player.value.setAudioSrc(src)
+    const playAudio = () => player.value.playAudio()
+    const stopAudio = () => player.value.stopAudio()
 
 
     return{
@@ -46,15 +31,12 @@ export const useMusicStore = defineStore('music', () => {
         setIdx,
 
         // player
-        initPlayer,
-        stopPlayer,
-        playPlayer,
-        setPlayerSrc,
-        getIsPaused,
+        setPlayer,
         getPlayer,
-
-        // context
-        setAudioApi,
-        getAudioApi
+        getIsPaused,
+        connectSource,
+        setAudioSrc,
+        playAudio,
+        stopAudio
     }
 })

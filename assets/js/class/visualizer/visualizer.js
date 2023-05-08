@@ -5,9 +5,9 @@ import Spline from '~/utils/cubic-spline.js'
 import Circle from './comps/circle.js'
 
 export default class{
-    constructor({engine, audio, color}){
+    constructor({engine, player, color}){
         this.engine = engine
-        this.audio = audio
+        this.player = player
         this.color = color
 
         this.scene = null
@@ -25,8 +25,8 @@ export default class{
         this.spilneAvgBoost = 1.0
         this.xs = Array.from({length: this.count}, (_, i) => i * 1)
         this.audioData = []
-        this.audioOffset = ~~(this.audio.fft / 2 * 0.4)
-        this.audioDataLen = this.audio.fft / 2 - this.audioOffset
+        this.audioOffset = ~~(this.player.fft / 2 * 0.4)
+        this.audioDataLen = this.player.fft / 2 - this.audioOffset
         this.audioStep = ~~(this.audioDataLen / this.count)
 
         // const radius = 25
@@ -123,7 +123,7 @@ export default class{
 
     // audio
     updateAudioData(){
-        const {audioData} = this.audio
+        const {audioData} = this.player
 
         if(audioData.length === 0) return
 
