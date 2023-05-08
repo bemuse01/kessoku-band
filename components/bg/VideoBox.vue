@@ -38,27 +38,24 @@ const classes = reactive({
 const lerpVelocity = 0.11
 const co = ref(0)
 const po = ref(0)
+const maxOpacity = 0.3
 const wrapperStyle = computed(() => ({opacity: `${co.value}`, transform: 'translateX(-50%)', left: '50%'}))
 
 
 // video
 const video = ref(null)
 const videoName = computed(() => musics[getIdx.value].video_filename)
-// const videoSrc = computed(() => videoName.value !== '' ? getVideoPath(videoName.value) : '')
 const hasVideo = computed(() => videoName.value === '' ? false : true)
 const initVideo = () => {
-    video.value.loop = true
     setVideo(video.value)
 }
 const showVideo = () => {
     if(!hasVideo.value) return
-    po.value = 0.5
-    // video.value.play()
+    po.value = maxOpacity
 }
 const hideVideo = () => {
     if(!hasVideo.value) return
     po.value = 0
-    // video.value.pause()
 }
 watch(getIsPaused, (cur, pre) => {
     if(cur) hideVideo()

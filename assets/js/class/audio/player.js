@@ -66,6 +66,7 @@ export default class{
     }
     setVideo(video){
         this.media.video.el = video
+        this.media.video.el.loop = true
     }
     getIsPaused(){
         return this.isPaused
