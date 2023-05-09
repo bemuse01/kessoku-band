@@ -1,6 +1,7 @@
 <template>
     <div
         :class="classes.box"
+        :style="boxStyle"
     >
 
         <div :class="classes.wrapper" :style="wrapperStyle">
@@ -13,11 +14,11 @@
 </template>
 
 <script setup>
-import {getVideoPath} from '~/utils/method.file.js'
 import musics from '~/assets/src/data/musics.json'
 import {useMusicStore} from '~/stores/music.js'
 import {storeToRefs} from 'pinia'
 import Method from '~/utils/method.math.js'
+import {RADIAN, GLOBAL_DEGREE} from '~/utils/const.js'
 
 
 // store
@@ -28,10 +29,26 @@ const {getIdx, getIsPaused} = storeToRefs(store)
 
 // class
 const classes = reactive({
-    box: 'absolute w-[60%] h-full top-0 right-0 overflow-hidden',
+    box: 'absolute h-full top-0 right-0 overflow-hidden',
     wrapper: 'relative w-[100vw] h-full ',
     video: 'absolute left-0 w-full h-full object-cover bg-cover'
 })
+
+
+// box
+const boxWidth = ref(0)
+const boxStyle = computed(() => ({width: `${boxWidth.value}px`}))
+const setBoxWidth = () => {
+    const {innerWidth, innerHeight} = window
+    
+    const halfw = innerWidth / 2
+    const halfh = innerHeight / 2
+
+    const y = halfh
+    const x = Math.abs(y / Math.tan((90 - GLOBAL_DEGREE) * RADIAN))
+
+    boxWidth.value = x + halfw + 5
+}
 
 
 // wrapper
@@ -64,17 +81,25 @@ watch(getIsPaused, (cur, pre) => {
 
 
 // method
+const onWindowResize = () => {
+    setBoxWidth()
+}
 const animate = () => {
     co.value = Method.lerp(co.value, po.value, lerpVelocity)
 
     requestAnimationFrame(() => animate())
 }
+const init = () => {
+    initVideo()
+    setBoxWidth()
+    animate()
+    window.addEventListener('resize', () => onWindowResize(), false)
+}
 
 
 // hook
 onMounted(() => {
-    initVideo()
-    animate()
+    init()
 })
 </script>
 
