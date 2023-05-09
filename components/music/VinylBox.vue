@@ -47,8 +47,8 @@ const {getIdx, getIsPaused} = storeToRefs(store)
 
 // class
 const classes = reactive({
-    container: 'absolute overflow-hidden w-[100vw] h-[100vh] flex justify-center items-center',
-    box: 'w-[100vh] aspect-square',
+    container: 'absolute overflow-hidden w-full h-full flex justify-center items-center',
+    box: 'w-[100vh] h-[100vh] aspect-square',
     wheel: 'w-full h-full',
     item: 'w-full h-full bg-[rgba(255,0,0,0.5)] rounded-[25%]'
 })
@@ -80,7 +80,7 @@ const resetVinylState = () => {
 const lerpVelocity = 0.11
 const cy = ref(0)
 const py = ref(0)
-const wheelStyle = computed(() => ({transform: `translateY(-${cy.value}%)`}))
+const wheelStyle = computed(() => ({transform: `translateY(-${cy.value.toFixed(1)}%)`}))
 const updateCy = () => {
     cy.value = Method.lerp(cy.value, py.value, lerpVelocity)
 }
