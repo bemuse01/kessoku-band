@@ -20,6 +20,13 @@
 <script setup>
 import {getImagePath} from '~/utils/method.file.js'
 import {VINYL_SCALE} from '~/utils/const.js'
+import {useMusicStore} from '~/stores/music.js'
+import {storeToRefs} from 'pinia'
+
+
+// store
+const store = useMusicStore()
+const {getIdx} = storeToRefs(store)
 
 
 // props
@@ -50,7 +57,14 @@ const coverPath = computed(() => getImagePath(coverName.value))
 const bgPath = getImagePath('vinyl.png')
 const bgOverlayPath = getImagePath('vinyl_overlay.png')
 const animationState = computed(() => nowPlaying.value ? 'running' : 'paused')
-const animStyle = computed(() => ({animation: `rotating 9s linear infinite reverse forwards ${animationState.value}`}))
+const animation = ref('rotating 9s linear infinite reverse')
+const animStyle = computed(() => ({animation: `${animation.value} ${animationState.value}`}))
+watch(nowPlaying, () => {
+    animation.value = 'rotating 9s linear infinite reverse'
+})
+watch(getIdx, () => {
+    animation.value = 'none'
+})
 // const rotation = ref(0)
 // const time = 9
 // const degStep = 6 / time
