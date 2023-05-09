@@ -56,8 +56,8 @@ const boxStyle = computed(() => ({transition: 'transform 0.5s', transform: `scal
 const coverPath = computed(() => getImagePath(coverName.value))
 const bgPath = getImagePath('vinyl.png')
 const bgOverlayPath = getImagePath('vinyl_overlay.png')
-const animationState = computed(() => nowPlaying.value ? 'running' : 'paused')
 const animation = ref('rotating 9s linear infinite reverse')
+const animationState = computed(() => nowPlaying.value ? 'running' : 'paused')
 const animStyle = computed(() => ({animation: `${animation.value} ${animationState.value}`}))
 watch(nowPlaying, () => {
     animation.value = 'rotating 9s linear infinite reverse'
