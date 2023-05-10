@@ -45,7 +45,7 @@ const {getIdx, isPaused} = storeToRefs(store)
 
 // class
 const classes = reactive({
-    container: 'absolute w-[28rem] h-[100%] top-[50%] translate-y-[-50%] overflow-hidden flex',
+    container: 'absolute w-[30rem] h-[100%] top-[50%] translate-y-[-50%] overflow-hidden flex',
     box: 'absolute top-[50%] w-full h-[50%] flex justify-center items-center',
     wrapper: 'absolute top-0 flex flex-col h-auto'
 })

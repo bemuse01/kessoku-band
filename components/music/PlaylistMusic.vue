@@ -57,13 +57,13 @@ const {thumbName, idx, num, artist, title, currentIdx} = toRefs(props)
 
 
 // music
-const opacity = computed(() => idx.value === currentIdx.value ? '1' : 0.5 - Math.abs(currentIdx.value - idx.value) * 0.15)
-// const show = ref(Math.abs(currentIdx.value - idx.value) < 4 ? true : false)
-const musicStyle = computed(() => ({opacity: `${Method.clamp(opacity.value, 0, 1)}`}))
+const opacity = computed(() => idx.value === currentIdx.value ? '1' : Method.clamp(0.5 - Math.abs(currentIdx.value - idx.value) * 0.15, 0, 1))
+const events = computed(() => opacity.value === 0 ? ({cursor: 'default', pointerEvents: 'none', touchAction: 'none'}) : ({cursor: 'pointer', pointerEvents: 'auto', touchAction: 'auto'}))
+const musicStyle = computed(() => ({opacity: `${opacity.value}`, ...events.value}))
 
 
 // bg
-const bgColor = computed(() => currentIdx.value === idx.value ? 'rgba(255, 255, 255, 0.075)' : 'transparent')
+const bgColor = computed(() => currentIdx.value === idx.value ? 'rgba(255, 255, 255, 0.05)' : 'transparent')
 const bgStyle = computed(() => ({transform: `translate(-50%, -50%) skewX(-${GLOBAL_DEGREE}deg)`, background: bgColor.value}))
 
 
@@ -81,7 +81,7 @@ const classes = reactive({
     bg: 'absolute flex w-[110%] h-[150%] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] skew-x-[-15deg]',
     num: 'flex justify-center items-center px-0.5 text-sm',
     thumb: 'flex w-[2.5rem] h-auto rounded-md overflow-hidden',
-    info: 'flex w-[14rem] overflow-hidden flex-col justify-center',
+    info: 'flex w-[15rem] overflow-hidden flex-col justify-center',
     title: 'overflow-hidden whitespace-nowrap text-ellipsis text-sm',
     artist: 'overflow-hidden whitespace-nowrap text-ellipsis text-xs text-[#6e6e6e]',
     duration: 'text-[#6e6e6e] flex text-sm'
@@ -89,5 +89,4 @@ const classes = reactive({
 </script>
 
 <style scoped>
-    
 </style>
