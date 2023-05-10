@@ -9,6 +9,9 @@ export const useMusicStore = defineStore('music', () => {
         idx.value += val
         idx.value = Method.clamp(idx.value, min, max)
     }
+    const setIdx2 = (val) => {
+        idx.value = val
+    }
 
 
     // player
@@ -30,6 +33,7 @@ export const useMusicStore = defineStore('music', () => {
         idx,
         getIdx,
         setIdx,
+        setIdx2,
 
         // player
         setPlayer,

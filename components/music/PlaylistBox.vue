@@ -21,6 +21,7 @@
                         :title="music.title"
                         :artist="music.artist"
                         :currentIdx="getIdx"
+                        @click="() => onClickMusic(music.key)"
                     />
 
                 </div>
@@ -39,7 +40,7 @@ import PlaylistMusic from './PlaylistMusic.vue'
 
 // store
 const store = useMusicStore()
-const {initPlayer, setIdx, playPlayer, stopPlayer, setPlayerSrc} = store
+const {setIdx2, stopMedia} = store
 const {getIdx, isPaused} = storeToRefs(store)
 
 
@@ -56,6 +57,13 @@ const y = computed(() => (100 / Musics.length) * getIdx.value)
 const wrapperStyle = computed(() => ({transform: `translateY(${-y.value}%)`}))
 
 
+// player
+const mediaType = computed(() => Musics[getIdx.value].video_filename === '' ? 'audio' : 'video')
+const stop = () => {
+    stopMedia(mediaType.value)
+}
+
+
 // musics
 const musics = ref(Musics.map(music => ({
     key: music.id,
@@ -64,6 +72,10 @@ const musics = ref(Musics.map(music => ({
     title: music.title_en,
     artist: music.artist_en
 })))
+const onClickMusic = (idx) => {
+    setIdx2(idx)
+    stop()
+}
 </script>
 
 <style scoped>

@@ -5,7 +5,7 @@
     >
 
         <div
-            :class="classes.bg"
+            :class="classes.bg + ' ' + bgClass"
             :style="bgStyle"
         >
         </div>
@@ -63,8 +63,9 @@ const musicStyle = computed(() => ({opacity: `${opacity.value}`, ...events.value
 
 
 // bg
-const bgColor = computed(() => currentIdx.value === idx.value ? 'rgba(255, 255, 255, 0.05)' : 'transparent')
-const bgStyle = computed(() => ({transform: `translate(-50%, -50%) skewX(-${GLOBAL_DEGREE}deg)`, background: bgColor.value}))
+const bgColor = computed(() => currentIdx.value === idx.value ? 'bg-[rgba(255,255,255,0.05)]' : 'bg-transparent')
+const bgClass = computed(() => `${bgColor.value} hover:bg-[rgba(255,255,255,0.05)]`)
+const bgStyle = computed(() => ({transform: `translate(-50%, -50%) skewX(-${GLOBAL_DEGREE}deg)`}))
 
 
 // num

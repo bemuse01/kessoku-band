@@ -87,12 +87,14 @@ const updateCy = () => {
 const updatePy = () => {
     py.value = getIdx.value * 100
 }
+watch(getIdx, () => updatePy())
 
 
 // player
 const mediaType = computed(() => musics[getIdx.value].video_filename === '' ? 'audio' : 'video')
 const videoPath = computed(() => getVideoPath(musics[getIdx.value].video_filename))
 const audioPath = computed(() => getAudioPath(musics[getIdx.value].audio_filename))
+watch(getIdx, () => resetVinylState())
 const play = () => {
     if(mediaType.value === 'video'){
         setSrc(mediaType.value, videoPath.value)
