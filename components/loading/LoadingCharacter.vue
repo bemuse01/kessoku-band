@@ -44,6 +44,7 @@ const chars = ref(files.map((file, key) => ({
 const charStyle = computed(() => (idx, y) => ({transform: `scale(${y})`, background: colors[idx]}))
 
 
+const animation = ref(null)
 const emitAnimDone = () => {
     setTimeout(() => emit('animDone'), colors.length * delay + 900)
 }
@@ -55,7 +56,7 @@ const animate = () => {
         char.cw = Method.lerp(char.cw, char.pw, lerpVelocity)
     })
 
-    requestAnimationFrame(() => animate())
+    animation.value = requestAnimationFrame(() => animate())
 }
 
 
@@ -65,6 +66,7 @@ onMounted(() => {
     emitAnimDone()
     animate()
 })
+onUnmounted(() => cancelAnimationFrame(animation.value))
 </script>
 
 <style scoped>
