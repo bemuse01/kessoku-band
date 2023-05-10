@@ -56,7 +56,7 @@ const lerpVelocity = 0.11
 const co = ref(0)
 const po = ref(0)
 const maxOpacity = 0.3
-const wrapperStyle = computed(() => ({opacity: `${co.value}`, transform: 'translateX(-50%)', left: '50%'}))
+const wrapperStyle = computed(() => ({opacity: `${co.value.toFixed(3)}`, transform: 'translateX(-50%)', left: '50%'}))
 
 
 // video
@@ -74,6 +74,12 @@ const hideVideo = () => {
     if(!hasVideo.value) return
     po.value = 0
 }
+const hideVideoByIdx = () => {
+    po.value = 0
+}
+watch(getIdx, () => {
+    hideVideoByIdx()
+})
 watch(getIsPaused, (cur, pre) => {
     if(cur) hideVideo()
     else showVideo()

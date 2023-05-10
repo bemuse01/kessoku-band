@@ -58,9 +58,10 @@ const wrapperStyle = computed(() => ({transform: `translateY(${-y.value}%)`}))
 
 
 // player
-const mediaType = computed(() => Musics[getIdx.value].video_filename === '' ? 'audio' : 'video')
+// const mediaType = computed(() => Musics[getIdx.value].video_filename === '' ? 'audio' : 'video')
 const stop = () => {
-    stopMedia(mediaType.value)
+    stopMedia('audio')
+    stopMedia('video')
 }
 
 
