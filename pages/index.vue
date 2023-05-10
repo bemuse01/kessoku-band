@@ -15,6 +15,8 @@
 
             <bg-box-2 />
 
+            <playlist-box />
+
             <vinyl-box />
 
         </template>
@@ -40,6 +42,7 @@ import BgBox2 from '~/components/bg/BgBox2.vue'
 import VinylBox from '~/components/music/VinylBox.vue'
 import TitleBox from '~/components/music/TitleBox.vue'
 import VideoBox from '~/components/bg/VideoBox.vue'
+import PlaylistBox from '~/components/music/PlaylistBox.vue'
 // import PlaylistContainer from '~/components/playlist/PlaylistContainer.vue'
 import LoadingBox from '~/components/loading/LoadingBox.vue'
 import {useMusicStore} from '~/stores/music.js'
