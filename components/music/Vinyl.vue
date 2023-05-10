@@ -8,9 +8,9 @@
             :style="boxStyle"
         >
 
-            <img :class="classes.cover" :src="coverPath" :style="animStyle"/>
-            <img :class="classes.img" :src="bgPath" :style="animStyle"/>
-            <img :class="classes.img + ' ' + classes.overlay" :src="bgOverlayPath"/>
+            <img :class="classes.cover" :src="coverPath" :style="animStyle" :draggable="draggable"/>
+            <img :class="classes.img" :src="bgPath" :style="animStyle" :draggable="draggable"/>
+            <img :class="classes.img + ' ' + classes.overlay" :src="bgOverlayPath" :draggable="draggable"/>
 
         </div>
         
@@ -53,6 +53,7 @@ const boxStyle = computed(() => ({transition: 'transform 0.5s', transform: `scal
 
 
 // vinyl bg
+const draggable = ref(false)
 const coverPath = computed(() => getImagePath(coverName.value))
 const bgPath = getImagePath('vinyl.png')
 const bgOverlayPath = getImagePath('vinyl_overlay.png')
