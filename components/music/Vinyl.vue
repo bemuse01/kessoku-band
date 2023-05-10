@@ -57,27 +57,15 @@ const draggable = ref(false)
 const coverPath = computed(() => getImagePath(coverName.value))
 const bgPath = getImagePath('vinyl.png')
 const bgOverlayPath = getImagePath('vinyl_overlay.png')
-const animation = ref('rotating 9s linear infinite reverse')
+const animation = ref('rotating 8s linear infinite reverse')
 const animationState = computed(() => nowPlaying.value ? 'running' : 'paused')
 const animStyle = computed(() => ({animation: `${animation.value} ${animationState.value}`}))
 watch(nowPlaying, () => {
-    animation.value = 'rotating 9s linear infinite reverse'
+    animation.value = 'rotating 8s linear infinite reverse'
 })
 watch(getIdx, () => {
     animation.value = 'none'
 })
-// const rotation = ref(0)
-// const time = 9
-// const degStep = 6 / time
-// const animStyle = computed(() => ({transform: `rotate(${rotation.value}deg)`}))
-// const animation = ref(null)
-// const animateVinyl = () => {
-//     rotation.value = (rotation.value + degStep) % 360
-// }
-// watch(nowPlaying, (cur, pre) => {
-//     if(cur) animate()
-//     else cancelAnimationFrame(animation.value)
-// })
 
 
 // method
