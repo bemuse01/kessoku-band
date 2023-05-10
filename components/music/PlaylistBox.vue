@@ -7,13 +7,9 @@
             :class="classes.box"
         >
 
-            <div
-                :class="classes.wrapper"
-            >
-
                 <div 
-                    :class="classes.wrapper2"
-                    :style="wrapper2Style"
+                    :class="classes.wrapper"
+                    :style="wrapperStyle"
                 >
 
                     <playlist-music 
@@ -28,8 +24,6 @@
                     />
 
                 </div>
-
-            </div>
 
         </div>
         
@@ -53,14 +47,13 @@ const {getIdx, isPaused} = storeToRefs(store)
 const classes = reactive({
     container: 'absolute w-[28rem] h-[100%] top-[50%] translate-y-[-50%] overflow-hidden flex',
     box: 'absolute top-[50%] w-full h-[50%] flex justify-center items-center',
-    wrapper: 'w-auto h-full',
-    wrapper2: 'flex flex-col w-full h-auto'
+    wrapper: 'absolute top-0 flex flex-col h-auto'
 })
 
 
 // wrapper
 const y = computed(() => (100 / Musics.length) * getIdx.value)
-const wrapper2Style = computed(() => ({transform: `translateY(${-y.value}%)`}))
+const wrapperStyle = computed(() => ({transform: `translateY(${-y.value}%)`}))
 
 
 // musics

@@ -5,6 +5,12 @@
     >
 
         <div
+            :class="classes.bg"
+            :style="bgStyle"
+        >
+        </div>
+
+        <div
             :class="classes.num"
         >
             <span>{{computedNum}}</span>
@@ -36,6 +42,7 @@
 <script setup>
 import {getImagePath} from '~/utils/method.file.js'
 import Method from '~/utils/method.math.js'
+import {GLOBAL_DEGREE} from '~/utils/const.js'
 
 
 const props = defineProps({
@@ -55,6 +62,11 @@ const opacity = computed(() => idx.value === currentIdx.value ? '1' : 0.5 - Math
 const musicStyle = computed(() => ({opacity: `${Method.clamp(opacity.value, 0, 1)}`}))
 
 
+// bg
+const bgColor = computed(() => currentIdx.value === idx.value ? 'rgba(255, 255, 255, 0.075)' : 'transparent')
+const bgStyle = computed(() => ({transform: `translate(-50%, -50%) skewX(-${GLOBAL_DEGREE}deg)`, background: bgColor.value}))
+
+
 // num
 const computedNum = computed(() => num.value < 10 ? '0' + num.value : num.value)
 
@@ -65,7 +77,8 @@ const thumbPath = computed(() => getImagePath(thumbName.value))
 
 // class
 const classes = reactive({
-    music: 'flex flex-row w-full h-auto overflow-hidden items-center text-white gap-4 py-3',
+    music: 'flex flex-row relative w-full h-[2.5rem] items-center text-white gap-4 my-3',
+    bg: 'absolute flex w-[110%] h-[150%] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] skew-x-[-15deg]',
     num: 'flex justify-center items-center px-0.5 text-sm',
     thumb: 'flex w-[2.5rem] h-auto rounded-md overflow-hidden',
     info: 'flex w-[14rem] overflow-hidden flex-col justify-center',
