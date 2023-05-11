@@ -2,15 +2,18 @@
     font-family: OpenSansRegular;
     src: url('/assets/src/font/OpenSans-Regular.ttf');
 }
-@font-face {
+/* @font-face {
     font-family: NotoSansJPBold;
     src: url('/assets/src/font/NotoSansJP-Bold.ttf');
-}
+} */
 @font-face {
     font-family: NotoSansJPBlack;
     src: url('/assets/src/font/NotoSansJP-Black.ttf');
 }
-
+@font-face {
+    font-family: NotoSansJPExtraBold;
+    src: url('/assets/src/font/NotoSansJP-ExtraBold.ttf');
+}
 
 *{
     box-sizing: border-box;
