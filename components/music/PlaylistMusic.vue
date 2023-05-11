@@ -78,10 +78,10 @@ const thumbPath = computed(() => getImagePath(thumbName.value))
 
 // class
 const classes = reactive({
-    music: 'flex flex-row relative w-full h-[2.5rem] items-center text-white gap-4 my-4',
+    music: 'flex flex-row relative w-full h-[3rem] items-center text-white gap-4 my-4',
     bg: 'absolute flex w-[110%] h-[150%] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] skew-x-[-15deg]',
     num: 'flex justify-center items-center px-0.5 text-sm',
-    thumb: 'flex w-[2.5rem] h-auto rounded-md overflow-hidden',
+    thumb: 'flex h-full aspect-square rounded-md overflow-hidden',
     info: 'flex w-[15rem] overflow-hidden flex-col justify-center',
     title: 'overflow-hidden whitespace-nowrap text-ellipsis text-sm',
     artist: 'overflow-hidden whitespace-nowrap text-ellipsis text-xs text-[#6e6e6e]',
