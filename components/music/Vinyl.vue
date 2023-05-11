@@ -52,7 +52,7 @@ const classes = reactive({
 
 
 // box
-const boxScale = computed(() => nowPlaying.value ? '0.66' : `${VINYL_SCALE}`)
+const boxScale = computed(() => nowPlaying.value ? `${VINYL_SCALE - 0.06}` : `${VINYL_SCALE}`)
 const boxStyle = computed(() => ({transition: 'transform 0.5s', transform: `scale(${boxScale.value})`}))
 
 
