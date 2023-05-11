@@ -33,7 +33,7 @@ const test = computed(() => musics[getIdx.value].title_jp)
 
 // class
 const classes = reactive({
-    box: 'absolute w-full h-full py-1 font-[NotoSansJPBlack] flex justify-end items-end text-[8rem] text-[rgba(0,0,0,0.125)] tracking-[-0.01em] overflow-hidden whitespace-nowrap',
+    box: 'absolute w-full h-full py-1 font-[NotoSansJPBlack] flex justify-end items-end text-[8rem] text-[rgba(0,0,0,0.1)] tracking-[-0.01em] overflow-hidden whitespace-nowrap',
     title: 'absolute right-0 flex flex-col text-right leading-none',
     artist: 'text-[6rem]'
 })
