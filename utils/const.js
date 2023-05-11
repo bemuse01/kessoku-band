@@ -1,6 +1,6 @@
 const RADIAN = Math.PI / 180
 const GLOBAL_DEGREE = 15
-const VINYL_SCALE = 0.72
+const VINYL_SCALE = 0.74
 const VINYL_POSITION = 0.03
 const MENU_HEIGHT = 90
 
