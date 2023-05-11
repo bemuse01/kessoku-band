@@ -7,9 +7,9 @@
 
             <bg-box-1 />
 
-            <box-wrapper class="relative flex flex-1 w-full">
+            <video-box />
 
-                <video-box />
+            <box-wrapper class="relative flex flex-1 w-full">
 
                 <title-box />
 
