@@ -119,6 +119,7 @@ const connect = () => {
     connectSource(mediaType.value)
 }
 const onVinylClick = (idx, nowPlaying) => {
+    if(idx !== getIdx.value) return
 
     // nowPlaying: 현재 재생중인 비닐 이외의 다른 비닐을 클릭 했을 때 rotate를 멈추기 위한 property
     if(nowPlaying){
