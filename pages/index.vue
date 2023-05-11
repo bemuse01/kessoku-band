@@ -27,7 +27,7 @@
 
             </box-wrapper>
 
-            <box-wrapper class="relative flex w-full h-[90px]">
+            <box-wrapper class="relative flex w-full h-[5.5rem]">
 
                 <menu-box />
 
