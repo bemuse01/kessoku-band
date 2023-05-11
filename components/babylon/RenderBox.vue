@@ -39,7 +39,7 @@ const classes = reactive({
 })
 
 
-// element
+// canvas
 const canvasRef = ref()
 
 

@@ -1,5 +1,5 @@
 import Circle from '../../objects/circle.js'
-import {RADIAN, VINYL_SCALE} from '~/utils/const.js'
+import {RADIAN, GLOBAL_DEGREE, VINYL_SCALE, VINYL_POSITION} from '~/utils/const.js'
 import Method from '~/utils/method.math.js'
 
 export default class{
@@ -39,6 +39,8 @@ export default class{
 
         const radius = vh / 2 * VINYL_SCALE
 
+        const node = new BABYLON.TransformNode()
+
         this.circle = new Circle({
             geometryOpt: {
                 radius: 1,
@@ -49,7 +51,12 @@ export default class{
             engine
         })
 
-        this.circle.get().rotation.z = -(90 + 15) * RADIAN
+        this.circle.get().parent = node
+        node.position.y = vh * VINYL_POSITION
+        node.position.x = vh * VINYL_POSITION / Math.tan(-(90 + GLOBAL_DEGREE) * RADIAN) / 2
+        // console.log(vh * VINYL_POSITION, node.position.y / Math.tan(-(90 + GLOBAL_DEGREE) * RADIAN))
+
+        this.circle.get().rotation.z = -(90 + GLOBAL_DEGREE) * RADIAN
         this.circle.get().scaling.x = radius
         this.circle.get().scaling.y = radius
 
@@ -76,7 +83,7 @@ export default class{
     animate(audioData){
         this.cv = Method.lerp(this.cv, this.pv, this.lerpVelocity)
 
-        this.updateCirclePosition(audioData)
+        // this.updateCirclePosition(audioData)
         this.updateCircleScale()
     }
     updateCirclePosition(audioData){

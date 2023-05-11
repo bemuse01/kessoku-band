@@ -1,6 +1,7 @@
 <template>
     <div
         :class="classes.wrapper"
+        :style="wrapperStyle"
     >
 
         <div
@@ -19,7 +20,7 @@
 
 <script setup>
 import {getImagePath} from '~/utils/method.file.js'
-import {VINYL_SCALE} from '~/utils/const.js'
+import {VINYL_SCALE, VINYL_POSITION} from '~/utils/const.js'
 import {useMusicStore} from '~/stores/music.js'
 import {storeToRefs} from 'pinia'
 
@@ -45,6 +46,10 @@ const classes = reactive({
     cover: 'w-[50%] h-[50%] absolute select-none',
     overlay: 'mix-blend-overlay rotate-[-40deg]'
 })
+
+
+// wrapper
+const wrapperStyle = computed(() => ({transform: `translateY(-${VINYL_POSITION * 100}vh)`}))
 
 
 // box
