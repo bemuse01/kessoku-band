@@ -13,7 +13,6 @@
 
             </box-wrapper>
 
-
             <box-wrapper class="relative flex flex-1 w-full">
 
                 <title-box />
