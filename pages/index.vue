@@ -5,9 +5,9 @@
 
         <div :class="classes.wrapper" v-if="isLoaded && !loadingBoxFlag">
 
-            <box-wrapper class="relative flex w-full h-full">
+            <bg-box-1 />
 
-                <bg-box-1 />
+            <box-wrapper class="relative flex flex-1 w-full">
 
                 <video-box />
 

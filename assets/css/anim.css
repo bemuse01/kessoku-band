@@ -36,6 +36,21 @@
 }
 
 
+.fade-x-enter-active,
+.fade-x-leave-active {
+  transition: all 0.5s;
+}
+.fade-x-enter-from{
+  opacity: 0;
+  transform: translateX(-10%);
+}
+.fade-x-leave-to {
+  opacity: 0;
+  transform: translateX(10%);
+}
+
+
+
 .translate-enter-active,
 .translate-leave-active {
   transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);

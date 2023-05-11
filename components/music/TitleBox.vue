@@ -3,7 +3,7 @@
         :class="classes.box"
     >
 
-        <transition-group name="fade-y-2">
+        <transition-group name="fade-x">
             <div
                 v-for="title in titles"
                 :key="title.key"
