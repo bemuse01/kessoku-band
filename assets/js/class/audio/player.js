@@ -9,18 +9,6 @@ export default class{
 
         this.context = null
 
-        this.audio = null
-        this.audioFadeOutFlag = true
-        this.audioFadeInFlag = false
-        this.audioSource = null
-        this.audioAnalyser = null
-
-        this.video = null
-        this.videoFadeOutFlag = true
-        this.videoFadeInFlag = false
-        this.videoSource = null
-        this.videoAnalyser = null
-
         this.media = {
             audio: {
                 el: null,
