@@ -1,25 +1,35 @@
 <template>
     <div 
-        :class="classes.wrapper"
+        :class="classes.root"
     >
 
-        <template v-if="isLoaded && !loadingBoxFlag">
+        <div :class="classes.wrapper" v-if="isLoaded && !loadingBoxFlag">
 
-            <bg-box-1 />
+            <box-wrapper class="relative flex w-full h-full">
 
-            <video-box />
+                <bg-box-1 />
 
-            <title-box />
+                <video-box />
 
-            <render-box />
+                <title-box />
 
-            <bg-box-2 />
+                <render-box />
 
-            <playlist-box />
+                <bg-box-2 />
 
-            <vinyl-box />
+                <playlist-box />
 
-        </template>
+                <vinyl-box />
+
+            </box-wrapper>
+
+            <box-wrapper class="relative flex w-full h-[90px]">
+
+                <menu-box />
+
+            </box-wrapper>
+
+        </div>
 
         <transition name="fade">
 
@@ -35,7 +45,6 @@
 </template>
 
 <script setup>
-// import LayerContainer from '~/components/public/LayerContainer.vue'
 import RenderBox from '~/components/babylon/RenderBox.vue'
 import BgBox1 from '~/components/bg/BgBox1.vue'
 import BgBox2 from '~/components/bg/BgBox2.vue'
@@ -43,8 +52,9 @@ import VinylBox from '~/components/music/VinylBox.vue'
 import TitleBox from '~/components/music/TitleBox.vue'
 import VideoBox from '~/components/bg/VideoBox.vue'
 import PlaylistBox from '~/components/music/PlaylistBox.vue'
-// import PlaylistContainer from '~/components/playlist/PlaylistContainer.vue'
 import LoadingBox from '~/components/loading/LoadingBox.vue'
+import MenuBox from '~/components/menu/MenuBox.vue'
+import BoxWrapper from '~/components/public/BoxWrapper.vue'
 import {useMusicStore} from '~/stores/music.js'
 import Player from '~/assets/js/class/audio/player.js'
 
@@ -56,13 +66,13 @@ const {setPlayer} = store
 
 // class
 const classes = reactive({
-    wrapper: 'relative w-[100vw] h-[100vh]'
+    root: 'relative w-[100vw] h-[100vh] overflow-hidden',
+    wrapper: 'absolute flex flex-col w-full h-full'
 })
 
 
 // init audio
 const initAudio = () => {
-    // initPlayer(new Audio())
     setPlayer(new Player())
 }
 

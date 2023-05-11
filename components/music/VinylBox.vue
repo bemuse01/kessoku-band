@@ -1,6 +1,7 @@
 <template>
     <div
         :class="classes.container"
+        :style="containerStyle"
     >
         
         <div
@@ -30,7 +31,7 @@
 </template>
 
 <script setup>
-import {GLOBAL_DEGREE} from '~/utils/const.js'
+import {GLOBAL_DEGREE, MENU_HEIGHT} from '~/utils/const.js'
 import {getAudioPath, getVideoPath} from '~/utils/method.file.js'
 import Method from '~/utils/method.math.js'
 import Vinyl from './Vinyl.vue'
@@ -47,11 +48,18 @@ const {getIdx, getIsPaused} = storeToRefs(store)
 
 // class
 const classes = reactive({
-    container: 'absolute overflow-hidden w-[100vh] h-[100vh] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] flex justify-center items-center',
-    box: 'w-full h-full aspect-square',
+    container: 'overflow-hidden w-full h-full flex justify-center items-center',
+    box: 'h-full aspect-square',
     wheel: 'w-full h-full',
     item: 'w-full h-full bg-[rgba(255,0,0,0.5)] rounded-[25%]'
 })
+
+
+// container
+const containerStyle = computed(() => ({
+    // width: `calc(100vh - ${MENU_HEIGHT}px)`,
+    // height: `calc(100vh - ${MENU_HEIGHT}px)`,
+}))
 
 
 // box

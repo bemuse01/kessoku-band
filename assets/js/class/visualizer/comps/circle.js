@@ -39,7 +39,7 @@ export default class{
 
         const radius = vh / 2 * VINYL_SCALE
 
-        const node = new BABYLON.TransformNode()
+        // const node = new BABYLON.TransformNode()
 
         this.circle = new Circle({
             geometryOpt: {
@@ -51,9 +51,9 @@ export default class{
             engine
         })
 
-        this.circle.get().parent = node
-        node.position.y = vh * VINYL_POSITION
-        node.position.x = vh * VINYL_POSITION / Math.tan(-(90 + GLOBAL_DEGREE) * RADIAN) / 2
+        // this.circle.get().parent = node
+        // node.position.y = vh * VINYL_POSITION
+        // node.position.x = vh * VINYL_POSITION / Math.tan(-(90 + GLOBAL_DEGREE) * RADIAN) / 2
         // console.log(vh * VINYL_POSITION, node.position.y / Math.tan(-(90 + GLOBAL_DEGREE) * RADIAN))
 
         this.circle.get().rotation.z = -(90 + GLOBAL_DEGREE) * RADIAN
@@ -83,7 +83,7 @@ export default class{
     animate(audioData){
         this.cv = Method.lerp(this.cv, this.pv, this.lerpVelocity)
 
-        // this.updateCirclePosition(audioData)
+        this.updateCirclePosition(audioData)
         this.updateCircleScale()
     }
     updateCirclePosition(audioData){

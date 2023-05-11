@@ -1,7 +1,6 @@
 <template>
     <div
         :class="classes.wrapper"
-        :style="wrapperStyle"
     >
 
         <div
@@ -49,7 +48,7 @@ const classes = reactive({
 
 
 // wrapper
-const wrapperStyle = computed(() => ({transform: `translateY(-${VINYL_POSITION * 100}vh)`}))
+// const wrapperStyle = computed(() => ({transform: `translateY(-${VINYL_POSITION * 100}vh)`}))
 
 
 // box
