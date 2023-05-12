@@ -5,15 +5,14 @@
     >
 
         <div :class="classes.wrapper" :style="wrapperStyle">
-            <video :class="classes.video" :ref="el => video = el">
-                <!-- <source :src="videoSrc"/> -->
-            </video>
+            <img :class="classes.img" :ref="el => img = el"/>
         </div>
 
     </div>
 </template>
 
 <script setup>
+import {getImagePath} from '~/utils/method.file.js'
 import musics from '~/assets/src/data/musics.json'
 import {useMusicStore} from '~/stores/music.js'
 import {storeToRefs} from 'pinia'
@@ -23,7 +22,6 @@ import {RADIAN, GLOBAL_DEGREE} from '~/utils/const.js'
 
 // store
 const store = useMusicStore()
-const {setVideo} = store
 const {getIdx, getIsPaused} = storeToRefs(store)
 
 
@@ -31,7 +29,7 @@ const {getIdx, getIsPaused} = storeToRefs(store)
 const classes = reactive({
     box: 'absolute h-full top-0 right-0 overflow-hidden',
     wrapper: 'relative w-[100vw] h-full flex items-center',
-    video: 'absolute left-0 w-full h-full object-cover bg-cover'
+    img: 'absolute w-full h-full object-cover blur'
 })
 
 
@@ -59,30 +57,31 @@ const maxOpacity = 0.3
 const wrapperStyle = computed(() => ({opacity: `${co.value.toFixed(3)}`, transform: 'translateX(-50%)', left: '50%'}))
 
 
-// video
-const video = ref(null)
-const videoName = computed(() => musics[getIdx.value].video_filename)
-const hasVideo = computed(() => videoName.value === '' ? false : true)
-const initVideo = () => {
-    setVideo(video.value)
+// img
+const img = ref(null)
+const imgPath = computed(() => getImagePath(musics[getIdx.value].cover_filename))
+const hasVideo = computed(() => musics[getIdx.value].video_filename === '' ? false : true)
+const setImgSrc = () => {
+    img.value.setAttribute('src', imgPath.value)
 }
-const showVideo = () => {
-    if(!hasVideo.value) return
+const showImage = () => {
+    if(hasVideo.value) return
+    setImgSrc()
     po.value = maxOpacity
 }
-const hideVideo = () => {
-    if(!hasVideo.value) return
+const hideImage = () => {
+    if(hasVideo.value) return
     po.value = 0
 }
-const hideVideoByIdx = () => {
+const hideImageByIdx = () => {
     po.value = 0
 }
 watch(getIdx, () => {
-    hideVideoByIdx()
+    hideImageByIdx()
 })
 watch(getIsPaused, (cur, pre) => {
-    if(cur) hideVideo()
-    else showVideo()
+    if(cur) hideImage()
+    else showImage()
 })
 
 
@@ -96,7 +95,6 @@ const animate = () => {
     requestAnimationFrame(() => animate())
 }
 const init = () => {
-    initVideo()
     setBoxWidth()
     animate()
     window.addEventListener('resize', () => onWindowResize(), false)

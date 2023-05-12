@@ -11,6 +11,8 @@
 
                 <video-box />
 
+                <image-box />
+
             </box-wrapper>
 
             <box-wrapper class="relative flex flex-1 w-full">
@@ -55,6 +57,7 @@ import BgBox2 from '~/components/bg/BgBox2.vue'
 import VinylBox from '~/components/music/VinylBox.vue'
 import TitleBox from '~/components/music/TitleBox.vue'
 import VideoBox from '~/components/bg/VideoBox.vue'
+import ImageBox from '~/components/bg/ImageBox.vue'
 import PlaylistBox from '~/components/music/PlaylistBox.vue'
 import LoadingBox from '~/components/loading/LoadingBox.vue'
 import MenuBox from '~/components/menu/MenuBox.vue'
