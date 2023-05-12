@@ -33,7 +33,7 @@ const {getIdx, getIsPaused} = storeToRefs(store)
 
 // class
 const classes = reactive({
-    box: 'h-full aspect-square cursor-pointer opacity-[0.35] hover:opacity-100'
+    box: 'h-full aspect-square cursor-pointer opacity-50 hover:opacity-100'
 })
 
 
