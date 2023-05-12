@@ -42,7 +42,7 @@ const {getIdx} = storeToRefs(store)
 
 // class
 const classes = reactive({
-    box: 'flex-1 w-full h-full',
+    box: 'menu-box flex-1 w-full h-full',
     boxBg: 'absolute w-full h-full bg-[rgba(255,255,255,0.1)] mix-blend-overlay backdrop-blur',
     logoBg: 'absolute right-[-1rem] w-[10rem] h-full bg-[hsl(206,15%,7%)]',
     wrapper: 'absolute w-[50%] h-full',

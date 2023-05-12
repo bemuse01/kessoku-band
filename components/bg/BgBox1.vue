@@ -33,7 +33,7 @@ const {getIdx} = storeToRefs(store)
 
 // class
 const classes = reactive({
-    wrapper: 'absolute left-0 w-full h-full bg-white overflow-hidden',
+    wrapper: 'bg-box-1 absolute left-0 w-full h-full bg-white overflow-hidden',
     bg: 'w-full h-full absolute'
 })
 

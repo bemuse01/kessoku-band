@@ -27,7 +27,7 @@ const {getIdx, getIsPaused} = storeToRefs(store)
 
 // class
 const classes = reactive({
-    box: 'absolute h-full top-0 right-0 overflow-hidden',
+    box: 'image-box absolute h-full top-0 right-0 overflow-hidden',
     wrapper: 'relative w-[100vw] h-full flex items-center',
     img: 'absolute w-full h-full object-cover blur'
 })

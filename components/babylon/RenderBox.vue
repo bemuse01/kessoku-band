@@ -32,7 +32,7 @@ import Visualizer from './Visualizer.vue'
 
 // class
 const classes = reactive({
-    container: 'absolute top-0 left-0 w-full h-full',
+    container: 'render-box absolute top-0 left-0 w-full h-full',
     canvasBox: 'w-full h-full absolute',
     canvas: 'w-full h-full',
     objectBox: 'absolute'

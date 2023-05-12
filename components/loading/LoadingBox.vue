@@ -25,7 +25,7 @@ const emit = defineEmits(['loadingDone'])
 
 // class
 const classes = reactive({
-    container: 'absolute w-[100vw] h-[100vh] bg-[#eeeeee] overflow-hidden font-[OpenSansRegular]',
+    container: 'loading-box absolute w-[100vw] h-[100vh] bg-[#eeeeee] overflow-hidden font-[OpenSansRegular]',
 })
 
 
