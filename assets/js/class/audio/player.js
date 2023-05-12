@@ -16,7 +16,8 @@ export default class{
                 fadeInFlag: false,
                 source: null,
                 analyser: null,
-                data: []
+                data: [],
+                currentTime: 0
             },
             video: {
                 el: null,
@@ -24,7 +25,8 @@ export default class{
                 fadeInFlag: false,
                 source: null,
                 analyser: null,
-                data: []
+                data: [],
+                currentTime: 0
             }
         }
 
@@ -59,20 +61,50 @@ export default class{
     getIsPaused(){
         return this.isPaused
     }
-    play(type){
-        this.isPaused = false
+    play(type, playType = 'pause'){
         this.media[type].el.play()
+
+        switch(playType){
+            case 'pause':
+                this.media[type].el.currentTime = this.media[type].currentTime
+                break
+
+            case 'stop':
+                this.media[type].el.currentTime = 0
+                break
+
+            default:
+                break
+        }
+
+        this.isPaused = false
         this.media[type].fadeInFlag = true
         this.media[type].fadeOutFlag = false
+    }
+    pause(type){
+        this.isPaused = true
+
+        // this.isStop = false
+        this.media[type].fadeInFlag = false
+        this.media[type].fadeOutFlag = true
     }
     stop(type){
         this.isPaused = true
 
+        // this.isStop = true
         this.media[type].fadeInFlag = false
         this.media[type].fadeOutFlag = true
     }
     setSrc(type, src){
         this.media[type].el.src = src
+    }
+    getSrc(type){
+        return this.media[type].el.src
+    }
+    resetCurrentTime(){
+        for(const key in this.media){
+            this.media[key].currentTime = 0
+        }
     }
 
 
@@ -105,9 +137,14 @@ export default class{
             this.updateData(this.media[key])
             this.fadeInVolume(this.media[key])
             this.fadeOutVolume(this.media[key])
+            this.updateCurrentTime(this.media[key])
         }
 
         requestAnimationFrame(() => this.animate())
+    }
+    updateCurrentTime(media){
+        if(!media.el || this.isPaused) return
+        media.currentTime = media.el.currentTime
     }
     updateData(media){
         if(!media.source) return
@@ -135,7 +172,7 @@ export default class{
 
             if(media.el.volume <= 0){
                 media.fadeOutFlag = false
-                if(this.isStop) media.el.currentTime = 0
+                // if(this.isStop) media.el.currentTime = 0
                 media.el.pause()
             }
         }

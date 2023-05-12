@@ -24,8 +24,11 @@ export const useMusicStore = defineStore('music', () => {
     const connectSource = (type) => player.value.connectSource(type)
     const getIsPaused = computed(() => player.value.getIsPaused())
     const setSrc = (type, src) => player.value.setSrc(type, src)
-    const playMedia = (type) => player.value.play(type)
+    const getSrc = (type) => player.value.getSrc(type)
+    const playMedia = (type, playType) => player.value.play(type, playType)
+    const pauseMedia = (type) => player.value.pause(type)
     const stopMedia = (type) => player.value.stop(type)
+    const resetCurrentTime = () => player.value.resetCurrentTime()
 
 
     return{
@@ -42,7 +45,10 @@ export const useMusicStore = defineStore('music', () => {
         getIsPaused,
         connectSource,
         setSrc,
+        getSrc,
         playMedia,
-        stopMedia
+        pauseMedia,
+        stopMedia,
+        resetCurrentTime
     }
 })

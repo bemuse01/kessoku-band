@@ -1,7 +1,6 @@
 <template>
     <div
         :class="classes.container"
-        :style="containerStyle"
     >
         
         <div
@@ -42,7 +41,7 @@ import {storeToRefs} from 'pinia'
 
 // store
 const store = useMusicStore()
-const {setIdx, connectSource, setSrc, playMedia, stopMedia} = store
+const {setIdx, connectSource, setSrc, getSrc, playMedia, stopMedia, resetCurrentTime} = store
 const {getIdx, getIsPaused} = storeToRefs(store)
 
 
@@ -53,13 +52,6 @@ const classes = reactive({
     wheel: 'w-full h-full',
     item: 'w-full h-full bg-[rgba(255,0,0,0.5)] rounded-[25%]'
 })
-
-
-// container
-const containerStyle = computed(() => ({
-    // width: `calc(100vh - ${MENU_HEIGHT}px)`,
-    // height: `calc(100vh - ${MENU_HEIGHT}px)`,
-}))
 
 
 // box
@@ -82,6 +74,10 @@ const setVinylState = (key) => {
 const resetVinylState = () => {
     vinyls.value.forEach(vinyl => vinyl.nowPlaying = false)
 }
+watch(getIsPaused, (cur) => {
+    if(cur) resetVinylState()
+    else setVinylState(getIdx.value)
+})
 
 
 // wheel
@@ -102,15 +98,19 @@ watch(getIdx, () => updatePy())
 const mediaType = computed(() => musics[getIdx.value].video_filename === '' ? 'audio' : 'video')
 const videoPath = computed(() => getVideoPath(musics[getIdx.value].video_filename))
 const audioPath = computed(() => getAudioPath(musics[getIdx.value].audio_filename))
-watch(getIdx, () => resetVinylState())
-const play = () => {
+watch(getIdx, () => {
+    resetVinylState()
+    resetCurrentTime()
+})
+const setMediaSrc = () => {
     if(mediaType.value === 'video'){
         setSrc(mediaType.value, videoPath.value)
     }else{
         setSrc(mediaType.value, audioPath.value)
     }
-
-    playMedia(mediaType.value)
+}
+const play = () => {
+    playMedia(mediaType.value, 'pause')
 }
 const stop = () => {
     stopMedia(mediaType.value)
@@ -122,29 +122,27 @@ const onVinylClick = (idx, nowPlaying) => {
     if(idx !== getIdx.value) return
 
     // nowPlaying: 현재 재생중인 비닐 이외의 다른 비닐을 클릭 했을 때 rotate를 멈추기 위한 property
-    if(nowPlaying){
+    // if(nowPlaying){
 
         if(getIsPaused.value){
 
+            setMediaSrc()
             play()
-            setVinylState(idx)
             connect()
 
         }else{
 
             stop()
-            resetVinylState()
 
         }
 
-    }else{
+    // }else{
 
-        stop()
-        play()
-        setVinylState(idx)
-        connect()
+    //     stop()
+    //     play()
+    //     connect()
 
-    }
+    // }
     
 }
 
