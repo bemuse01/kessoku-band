@@ -1,17 +1,18 @@
 <template>
     <div
         :class="classes.box"
+        :style="boxStyle"
         @click="() => onClickButton()"
     >
         <svg width="100%" height="100%" viewBox="0 0 24 24">
 
             <template v-if="getIsPaused">
-                <path fill="#ffffff" d="M8 5v14l11-7z"/>
+                <path fill="currentColor" d="M8 5v14l11-7z"/>
             </template>
 
             <template v-else>
-                <rect x="6" y="5" width="4" height="14" fill="#ffffff"/>
-                <rect x="14" y="5" width="4" height="14" fill="#ffffff"/>
+                <rect x="6" y="5" width="4" height="14" fill="currentColor"/>
+                <rect x="14" y="5" width="4" height="14" fill="currentColor"/>
             </template>
 
         </svg>
@@ -32,8 +33,13 @@ const {getIdx, getIsPaused} = storeToRefs(store)
 
 // class
 const classes = reactive({
-    box: 'h-full aspect-square'
+    box: 'h-full aspect-square cursor-pointer opacity-[0.35] hover:opacity-100'
 })
+
+
+// box
+const boxColor = computed(() => musics[getIdx.value].color)
+const boxStyle = computed(() => ({color: boxColor.value}))
 
 
 // player
