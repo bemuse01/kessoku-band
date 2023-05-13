@@ -37,7 +37,7 @@ const {getIdx, getIsPaused} = storeToRefs(store)
 // class
 const classes = reactive({
     box: 'box w-[14rem] h-full flex justify-center items-center cursor-pointer',
-    wrapper: 'relative w-[12.5rem] h-[8px] flex justify-center items-center',
+    wrapper: 'relative w-[12.5rem] h-[4px] flex justify-center items-center',
     trackWrapper: 'absolute w-full h-full rounded-md overflow-hidden',
     track: 'absolute w-full h-full opacity-20 rounded-md',
     thumb: 'thumb absolute translate-x-[-50%] h-full aspect-square rounded-[50%]',
@@ -142,6 +142,6 @@ onMounted(() => {
     transform: scale(0);
 }
 .box:hover .thumb{
-    transform: scale(1.5);
+    transform: scale(3.5);
 }
 </style>
