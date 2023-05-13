@@ -29,6 +29,8 @@ export const useMusicStore = defineStore('music', () => {
     const pauseMedia = (type) => player.value.pause(type)
     const stopMedia = (type) => player.value.stop(type)
     const resetCurrentTime = () => player.value.resetCurrentTime()
+    const getProgress = (type) => player.value.getProgress(type)
+    const setProgress = (type, value) => player.value.setProgress(type, value)
 
 
     return{
@@ -49,6 +51,8 @@ export const useMusicStore = defineStore('music', () => {
         playMedia,
         pauseMedia,
         stopMedia,
-        resetCurrentTime
+        resetCurrentTime,
+        getProgress,
+        setProgress
     }
 })

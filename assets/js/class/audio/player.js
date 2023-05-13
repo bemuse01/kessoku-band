@@ -106,6 +106,12 @@ export default class{
             this.media[key].currentTime = 0
         }
     }
+    getProgress(type){
+        return this.media[type].el.currentTime / this.media[type].el.duration
+    }
+    setProgress(type, value){
+        this.media[type].el.currentTime = this.media[type].el.duration * value
+    }
 
 
     // audio context
