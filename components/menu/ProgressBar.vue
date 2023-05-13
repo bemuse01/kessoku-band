@@ -144,21 +144,4 @@ onMounted(() => {
 .box:hover .thumb{
     transform: scale(1.5);
 }
-/* input[type="range"]{
-    appearance: none;
-    outline: none;
-    background: transparent;
-    opacity: 0;
-    transition: 0.2s;
-}
-input[type="range"]:hover{
-    background: transparent;
-    opacity: 1;
-}
-input[type="range"]::-webkit-slider-thumb{
-    cursor: pointer;
-}
-input[type="range"]::-moz-range-thumb{
-    cursor: pointer;
-} */
 </style>
