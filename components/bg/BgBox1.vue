@@ -24,6 +24,7 @@ import {storeToRefs} from 'pinia'
 import musics from '~/assets/src/data/musics.json'
 import {v4 as uuidv4} from 'uuid'
 import {gsap} from 'gsap'
+import {DEBOUNCE_DELAY} from '~/utils/const.js'
 
 
 // store
@@ -39,7 +40,6 @@ const classes = reactive({
 
 
 // bg color
-const delay = 500
 const tweenTime = 1
 const bgs = ref(Array.from({length: 1}, (_, key) => ({
     key: uuidv4(),
@@ -89,7 +89,7 @@ const slideBg = () => {
 }
 watch(getIdx, debounce(function(cur, pre){
     slideBg()
-}, delay))
+}, DEBOUNCE_DELAY))
 </script>
 
 <style scoped>

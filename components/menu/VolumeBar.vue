@@ -28,10 +28,17 @@ import {storeToRefs} from 'pinia'
 import Method from '~/utils/method.math.js'
 
 
+// props
+const props = defineProps({
+    mainColor: String
+})
+const {mainColor} = toRefs(props)
+
+
 // store
 const store = useMusicStore()
 const {getVolume, setVolume} = store
-const {getIdx, getIsPaused} = storeToRefs(store)
+const {getIdx} = storeToRefs(store)
 
 
 // class
@@ -43,10 +50,6 @@ const classes = reactive({
     thumb: 'absolute scale-[4.5] translate-x-[-50%] h-full aspect-square rounded-[50%]',
     progress: 'absolute w-full h-full',
 })
-
-
-// 
-const mainColor = computed(() => musics[getIdx.value].color)
 
 
 // player

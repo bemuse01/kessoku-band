@@ -23,12 +23,12 @@ import {debounce} from 'lodash'
 import {useMusicStore} from '~/stores/music.js'
 import {storeToRefs} from 'pinia'
 import {v4 as uuidv4} from 'uuid'
+import {DEBOUNCE_DELAY} from '~/utils/const.js'
 
 
 // store
 const store = useMusicStore()
 const {getIdx} = storeToRefs(store)
-const test = computed(() => musics[getIdx.value].title_jp)
 
 
 // class
@@ -40,7 +40,6 @@ const classes = reactive({
 
 
 // title
-const delay = 500
 const titles = ref(Array.from({length: 1}, () => ({
     key: uuidv4(),
     artist: musics[getIdx.value].artist_jp,
@@ -56,7 +55,7 @@ const addTitle = () => {
 }
 watch(getIdx, debounce(function(cur, pre){
     addTitle()
-}, delay))
+}, DEBOUNCE_DELAY))
 </script>
 
 <style scoped>

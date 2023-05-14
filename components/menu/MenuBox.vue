@@ -15,13 +15,13 @@
 
             <div :class="classes.controls">
 
-                <play-button />
+                <play-button :mainColor="mainColor" />
 
-                <stop-button />
+                <stop-button :mainColor="mainColor" />
 
-                <progress-bar />
+                <progress-bar :mainColor="mainColor" />
 
-                <volume-bar />
+                <volume-bar :mainColor="mainColor" />
 
             </div>
 
@@ -39,6 +39,8 @@ import PlayButton from './PlayButton.vue'
 import StopButton from './StopButton.vue'
 import ProgressBar from './ProgressBar.vue'
 import VolumeBar from './VolumeBar.vue'
+import {debounce} from 'lodash'
+import {DEBOUNCE_DELAY} from '~/utils/const.js'
 
 
 // store
@@ -51,10 +53,17 @@ const classes = reactive({
     box: 'menu-box flex-1 w-full h-full',
     boxBg: 'absolute w-full h-full bg-[rgba(255,255,255,0.1)] mix-blend-overlay backdrop-blur',
     logoBg: 'absolute right-[-1rem] w-[10rem] h-full bg-[hsl(206,15%,7%)]',
-    wrapper: 'absolute w-[50%] h-full flex justify-center items-center',
+    wrapper: 'absolute w-[50%] h-full flex px-8 items-center',
     menuBg: 'absolute right-0 w-[200%] h-full bg-[hsl(206,15%,7%)]',
     controls: 'absolute w-auto h-[1.25rem] flex gap-4'
 })
+
+
+// 
+const mainColor = ref(musics[getIdx.value].color)
+watch(getIdx, debounce(function(cur, pre){
+    mainColor.value = musics[cur].color
+}, DEBOUNCE_DELAY))
 
 
 // box

@@ -26,9 +26,16 @@ import {useMusicStore} from '~/stores/music.js'
 import {storeToRefs} from 'pinia'
 
 
+// props
+const props = defineProps({
+    mainColor: String
+})
+const {mainColor} = toRefs(props)
+
+
 // store
 const store = useMusicStore()
-const {setIdx, connectSource, setSrc, playMedia, stopMedia} = store
+const {connectSource, setSrc, playMedia, stopMedia} = store
 const {getIdx, getIsPaused} = storeToRefs(store)
 
 
@@ -39,8 +46,7 @@ const classes = reactive({
 
 
 // box
-const boxColor = computed(() => musics[getIdx.value].color)
-const boxStyle = computed(() => ({color: boxColor.value}))
+const boxStyle = computed(() => ({color: mainColor.value}))
 
 
 // player
