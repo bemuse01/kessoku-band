@@ -13,7 +13,7 @@
 
             <div :class="classes.menuBg" :style="menuBgStyle"></div>
 
-            <div :class="classes.controls">
+            <div :class="classes.controls" :style="controlsStyle">
 
                 <play-button :mainColor="mainColor" />
 
@@ -32,7 +32,6 @@
 
 <script setup>
 import musics from '~/assets/src/data/musics.json'
-import {GLOBAL_DEGREE} from '~/utils/const.js'
 import {useMusicStore} from '~/stores/music.js'
 import {storeToRefs} from 'pinia'
 import PlayButton from './PlayButton.vue'
@@ -40,7 +39,7 @@ import StopButton from './StopButton.vue'
 import ProgressBar from './ProgressBar.vue'
 import VolumeBar from './VolumeBar.vue'
 import {debounce} from 'lodash'
-import {DEBOUNCE_DELAY} from '~/utils/const.js'
+import {DEBOUNCE_DELAY, GLOBAL_DEGREE} from '~/utils/const.js'
 
 
 // store
@@ -70,6 +69,10 @@ watch(getIdx, debounce(function(cur, pre){
 // const boxBg = computed(() => `${musics[getIdx.value].color}`)
 // const boxStyle = computed(() => ({background: 'linear-gradient(to right, rgba(0, 0, 0, 0.2), transparent)'}))
 // const boxStyle = computed(() => ({background: 'rgba(0, 0, 0, 0.1)'}))
+
+
+// controls
+const controlsStyle = computed(() => ({transform: `skewX(-${GLOBAL_DEGREE}deg)`}))
 
 
 // menu
