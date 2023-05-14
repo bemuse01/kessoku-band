@@ -38,7 +38,7 @@ const {mainColor} = toRefs(props)
 // store
 const store = useMusicStore()
 const {getProgress, setProgress} = store
-const {getIdx, getIsPaused} = storeToRefs(store)
+const {getIdx, getIsPaused, getStopFlag} = storeToRefs(store)
 
 
 // class
@@ -98,6 +98,9 @@ const onMouseMoveThumb = (e) => {
 const onMouseUpThumb = () => {
     draggable = false
 }
+const resetThumb = () => {
+    thumbStyle.value.left = '0'
+}
 
 
 // progress
@@ -114,6 +117,14 @@ const resetProgress = () => {
 watch(getIdx, () => {
     resetProgress()
 })
+
+
+// stop flag
+watch(getStopFlag, () => {
+    resetProgress()
+    resetThumb()
+})
+
 
 
 // method

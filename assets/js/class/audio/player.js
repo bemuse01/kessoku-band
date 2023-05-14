@@ -3,9 +3,10 @@ import Method from '~/utils/method.math.js'
 export default class{
     constructor(){
         this.isPaused = true
-        this.isStop = true
+        // this.isStop = true
         this.masterVolume = 1
         this.volumeStep = 0.03
+        this.stopFlag = true
 
         this.context = null
 
@@ -118,6 +119,12 @@ export default class{
     setVolume(type, value){
         this.masterVolume = value
         this.media[type].el.volume = value
+    }
+    toggleStopFlag(){
+        this.stopFlag = !this.stopFlag
+    }
+    getStopFlag(){
+        return this.stopFlag
     }
 
 

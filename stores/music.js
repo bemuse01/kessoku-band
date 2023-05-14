@@ -33,6 +33,8 @@ export const useMusicStore = defineStore('music', () => {
     const setProgress = (type, value) => player.value.setProgress(type, value)
     const setVolume = (type, value) => player.value.setVolume(type, value)
     const getVolume = () => player.value.getVolume()
+    const toggleStopFlag = () => player.value.toggleStopFlag()
+    const getStopFlag = computed(() => player.value.getStopFlag())
 
 
     return{
@@ -57,6 +59,8 @@ export const useMusicStore = defineStore('music', () => {
         getProgress,
         setProgress,
         setVolume,
-        getVolume
+        getVolume,
+        toggleStopFlag,
+        getStopFlag
     }
 })

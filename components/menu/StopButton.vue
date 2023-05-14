@@ -29,7 +29,7 @@ const {mainColor} = toRefs(props)
 
 // store
 const store = useMusicStore()
-const {stopMedia, resetCurrentTime} = store
+const {stopMedia, resetCurrentTime, toggleStopFlag} = store
 const {getIdx} = storeToRefs(store)
 
 
@@ -53,6 +53,7 @@ const onClickButton = () => {
 
     stop()
     resetCurrentTime()
+    toggleStopFlag()
     
 }
 </script>
