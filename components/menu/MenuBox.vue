@@ -21,6 +21,8 @@
 
                 <progress-bar />
 
+                <volume-bar />
+
             </div>
 
         </div>
@@ -36,6 +38,7 @@ import {storeToRefs} from 'pinia'
 import PlayButton from './PlayButton.vue'
 import StopButton from './StopButton.vue'
 import ProgressBar from './ProgressBar.vue'
+import VolumeBar from './VolumeBar.vue'
 
 
 // store
@@ -50,7 +53,7 @@ const classes = reactive({
     logoBg: 'absolute right-[-1rem] w-[10rem] h-full bg-[hsl(206,15%,7%)]',
     wrapper: 'absolute w-[50%] h-full flex justify-center items-center',
     menuBg: 'absolute right-0 w-[200%] h-full bg-[hsl(206,15%,7%)]',
-    controls: 'absolute w-auto h-[2rem] flex gap-2'
+    controls: 'absolute w-auto h-[1.25rem] flex gap-4'
 })
 
 

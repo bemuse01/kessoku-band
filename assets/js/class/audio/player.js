@@ -112,6 +112,13 @@ export default class{
     setProgress(type, value){
         this.media[type].el.currentTime = this.media[type].el.duration * value
     }
+    getVolume(){
+        return this.masterVolume
+    }
+    setVolume(type, value){
+        this.masterVolume = value
+        this.media[type].el.volume = value
+    }
 
 
     // audio context

@@ -4,15 +4,16 @@
         :style="boxStyle"
         @click="() => onClickButton()"
     >
-        <svg width="100%" height="100%" viewBox="0 0 24 24">
+        <svg width="100%" height="100%" viewBox="0 0 50 50">
 
             <template v-if="getIsPaused">
-                <path fill="currentColor" d="M8 5v14l11-7z"/>
+                <!-- <path  d="M8 5v14l11-7z"/> -->
+                <path fill="currentColor" d="M50,25 L0,50 L0,0 L50,25 Z"/>
             </template>
 
             <template v-else>
-                <rect x="6" y="5" width="4" height="14" fill="currentColor"/>
-                <rect x="14" y="5" width="4" height="14" fill="currentColor"/>
+                <path fill="currentColor" d="M0,0 L19,0 L19,50 L0,50 L0,0 Z"/>
+                <path fill="currentColor" d="M31,0 L50,0 L50,50 L31,50 L31,0 Z"/>
             </template>
 
         </svg>

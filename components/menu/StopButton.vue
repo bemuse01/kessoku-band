@@ -29,7 +29,7 @@ const {getIdx} = storeToRefs(store)
 // class
 const classes = reactive({
     box: 'h-full aspect-square flex justify-center items-center cursor-pointer opacity-50 hover:opacity-100',
-    shape: 'w-[55%] h-[55%]'
+    shape: 'w-full h-full'
 })
 
 

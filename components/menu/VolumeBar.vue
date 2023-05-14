@@ -30,17 +30,17 @@ import Method from '~/utils/method.math.js'
 
 // store
 const store = useMusicStore()
-const {getProgress, setProgress} = store
+const {getVolume, setVolume} = store
 const {getIdx, getIsPaused} = storeToRefs(store)
 
 
 // class
 const classes = reactive({
-    box: 'box w-[14rem] h-full flex justify-center items-center cursor-pointer',
+    box: 'w-[4rem] h-full flex justify-center items-center cursor-pointer',
     wrapper: 'relative w-full h-[3px] flex justify-center items-center',
     trackWrapper: 'absolute w-full h-full rounded-md overflow-hidden',
     track: 'absolute w-full h-full opacity-20 rounded-md',
-    thumb: 'thumb absolute translate-x-[-50%] h-full aspect-square rounded-[50%]',
+    thumb: 'absolute scale-[4.5] translate-x-[-50%] h-full aspect-square rounded-[50%]',
     progress: 'absolute w-full h-full',
 })
 
@@ -58,12 +58,23 @@ const track = ref(null)
 const trackStyle = computed(() => ({background: mainColor.value}))
 
 
+// progress
+const progressScale = ref(getVolume())
+const progressStyle = computed(() => ({background: mainColor.value, transform: `scaleX(${progressScale.value.toFixed(3)})`, transformOrigin: 'left'}))
+const updateProgress = () => {
+    // if(getIsPaused.value) return
+    
+    progressScale.value = getVolume()
+}
+
+
 // thumb
 const thumb = ref(null)
-const thumbStyle = computed(() => ({background: mainColor.value, left: '0'}))
+const thumbLeft = ref('0')
+const thumbStyle = computed(() => ({background: mainColor.value, left: thumbLeft.value}))
 let draggable = false
 const updateThumbPosition = (e) => {
-    if(getIsPaused.value) return
+    // if(getIsPaused.value) return
 
     const {clientX} = e
     const thumbWidth = thumb.value.offsetWidth
@@ -72,20 +83,22 @@ const updateThumbPosition = (e) => {
     const thumbPosition = clientX - left - thumbWidth / 2
     const progress = Method.clamp(thumbPosition, 0, trackWidth) / trackWidth
 
-    setProgress(mediaType.value, progress)
+    setVolume(mediaType.value, progress)
 }
 const updateThumbPosition2 = () => {
-    if(getIsPaused.value) return
+    // if(getIsPaused.value) return
 
     const thumbWidth = thumb.value.offsetWidth
     const trackWidth = track.value.offsetWidth
 
-    const left = getProgress(mediaType.value) * trackWidth - thumbWidth / 2
-    thumbStyle.value.left = left.toFixed(1) + 'px'
+    const left = getVolume() * trackWidth - thumbWidth / 2
+    thumbLeft.value = left.toFixed(1) + 'px'
 }
 const onMouseDownThumb = (e) => {
     draggable = true
     updateThumbPosition(e)
+    updateProgress()
+    updateThumbPosition2()
 }
 const onMouseMoveThumb = (e) => {
     if(draggable){
@@ -97,36 +110,18 @@ const onMouseUpThumb = () => {
 }
 
 
-// progress
-const progressScale = ref(0)
-const progressStyle = computed(() => ({background: mainColor.value, transform: `scaleX(${progressScale.value.toFixed(3)})`, transformOrigin: 'left'}))
-const updateProgress = () => {
-    if(getIsPaused.value) return
-    
-    progressScale.value = getProgress(mediaType.value)
-}
-const resetProgress = () => {
-    progressScale.value = 0
-}
-watch(getIdx, () => {
-    resetProgress()
-})
-
-
 // method
-const animate = () => {
-    updateProgress()
-    updateThumbPosition2()
-    requestAnimationFrame(() => animate())
-}
 const onMouseMove = (e) => {
     onMouseMoveThumb(e)
+    updateProgress()
+    updateThumbPosition2()
 }
 const onMouseUp = () => {
     onMouseUpThumb()
 }
 const init = () => {
-    animate()
+    updateThumbPosition2()
+    updateProgress()
     document.addEventListener('mousemove', (e) => onMouseMove(e))
     document.addEventListener('mouseup', () => onMouseUp())
 }
@@ -139,11 +134,4 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.thumb{
-    transition: transform 0.1s;
-    transform: scale(0);
-}
-.box:hover .thumb{
-    transform: scale(4.5);
-}
 </style>
