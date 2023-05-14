@@ -74,6 +74,8 @@ const musics = ref(Musics.map(music => ({
     artist: music.artist_en
 })))
 const onClickMusic = (idx) => {
+    if(getIdx.value === idx) return
+    
     setIdx2(idx)
     stop()
 }
