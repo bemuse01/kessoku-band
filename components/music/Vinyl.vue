@@ -19,7 +19,7 @@
 
 <script setup>
 import {getImagePath} from '~/utils/method.file.js'
-import {VINYL_SCALE, VINYL_SCALE_SMALL, SCREEN_SIZE_640} from '~/utils/const.js'
+import {VINYL_SCALE, VINYL_SCALE_SMALL, VINYL_SCALE_MIN, SCREEN_SIZE_640, SCREEN_SIZE_480} from '~/utils/const.js'
 import {useMusicStore} from '~/stores/music.js'
 import {storeToRefs} from 'pinia'
 
@@ -58,7 +58,9 @@ const boxStyle = computed(() => ({transition: 'transform 0.5s', transform: `scal
 const setBoxSize = () => {
     const {innerWidth} = window
 
-    if(innerWidth < SCREEN_SIZE_640){
+    if(innerWidth < SCREEN_SIZE_480){
+        boxSize.value = VINYL_SCALE_MIN
+    }else if(innerWidth < SCREEN_SIZE_640){
         boxSize.value = VINYL_SCALE_SMALL
     }else{
         boxSize.value = VINYL_SCALE

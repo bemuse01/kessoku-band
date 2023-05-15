@@ -1,5 +1,5 @@
 import Circle from '../../objects/circle.js'
-import {RADIAN, GLOBAL_DEGREE, VINYL_SCALE, VINYL_SCALE_SMALL, SCREEN_SIZE_640} from '~/utils/const.js'
+import {RADIAN, GLOBAL_DEGREE, VINYL_SCALE, VINYL_SCALE_SMALL, VINYL_SCALE_MIN, SCREEN_SIZE_640, SCREEN_SIZE_480} from '~/utils/const.js'
 import Method from '~/utils/method.math.js'
 
 export default class{
@@ -41,7 +41,8 @@ export default class{
 
         let scale = VINYL_SCALE
 
-        if(rw < SCREEN_SIZE_640) scale = VINYL_SCALE_SMALL
+        if(rw < SCREEN_SIZE_480) scale = VINYL_SCALE_MIN
+        else if(rw < SCREEN_SIZE_640) scale = VINYL_SCALE_SMALL
 
         const radius = vh / 2 * scale
 
@@ -82,12 +83,14 @@ export default class{
     // resize
     resize({rw, vh}){
         this.vh = vh
-        if(rw < SCREEN_SIZE_640){
+        
+        if(rw < SCREEN_SIZE_480){
+            this.resizeCircle(VINYL_SCALE_MIN)
+        }else if(rw < SCREEN_SIZE_640){
             this.resizeCircle(VINYL_SCALE_SMALL)
         }else{
             this.resizeCircle(VINYL_SCALE)
         }
-
     }
     resizeCircle(scale){
         const radius = this.vh / 2 * scale

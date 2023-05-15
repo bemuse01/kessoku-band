@@ -37,6 +37,7 @@ import Vinyl from './Vinyl.vue'
 import musics from '~/assets/src/data/musics.json'
 import {useMusicStore} from '~/stores/music.js'
 import {storeToRefs} from 'pinia'
+import {throttle} from 'lodash'
 
 
 // store
@@ -91,7 +92,20 @@ const updateCy = () => {
 const updatePy = () => {
     py.value = getIdx.value * 100
 }
+const updateIdx = (deltaY) => {
+    if(!getIsPaused.value) return
+
+    const direction = Math.sign(deltaY)
+
+    setIdx(direction, 0, vinyls.value.length - 1)
+    updatePy(direction)
+}
 watch(getIdx, () => updatePy())
+
+
+// touch
+const touchable = ref(false)
+const startY = ref(0)
 
 
 // player
@@ -149,15 +163,22 @@ const onVinylClick = (idx, nowPlaying) => {
 
 // method
 const onMouseWheel = (e) => {
-    if(!getIsPaused.value) return
-
-    const direction = Math.sign(e.deltaY)
-
-    setIdx(direction, 0, vinyls.value.length - 1)
-    updatePy(direction)
+    updateIdx(e.deltaY)
 }
-const onTouchMove = (e) => {
-    console.log(e)
+const onTouchStart = (e) => {
+    startY.value = e.touches[0].clientY
+    touchable.value = true
+}
+const onTouchMove = throttle((e) => {
+    if(!touchable.value) return
+
+    const deltaY = e.touches[0].clientY - startY.value
+
+    updateIdx(-deltaY)
+
+}, 100)
+const onTouchEnd = () => {
+    touchable.value = false
 }
 const animate = () => {
     updateCy()
@@ -166,7 +187,9 @@ const animate = () => {
 const init = () => {
     animate()
     window.addEventListener('wheel', (e) => onMouseWheel(e))
+    window.addEventListener('touchstart', (e) => onTouchStart(e))
     window.addEventListener('touchmove', (e) => onTouchMove(e))
+    window.addEventListener('touchend', () => onTouchEnd())
 }
 
 
