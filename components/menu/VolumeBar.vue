@@ -122,11 +122,15 @@ const onMouseMove = (e) => {
 const onMouseUp = () => {
     onMouseUpThumb()
 }
+const onWindowResize = () => {
+    updateThumbPosition2()
+}
 const init = () => {
     updateThumbPosition2()
     updateProgress()
     document.addEventListener('mousemove', (e) => onMouseMove(e))
     document.addEventListener('mouseup', () => onMouseUp())
+    window.addEventListener('resize', () => onWindowResize(), false)
 }
 
 
