@@ -38,9 +38,10 @@ import PlayButton from './PlayButton.vue'
 import StopButton from './StopButton.vue'
 import ProgressBar from './ProgressBar.vue'
 import VolumeBar from './VolumeBar.vue'
-import {debounce} from 'lodash'
+import * as LODASH from 'lodash'
 import {DEBOUNCE_DELAY, GLOBAL_DEGREE} from '~/utils/const.js'
 
+const {debounce} = LODASH
 
 // store
 const store = useMusicStore()

@@ -37,7 +37,10 @@ import Vinyl from './Vinyl.vue'
 import musics from '~/assets/src/data/musics.json'
 import {useMusicStore} from '~/stores/music.js'
 import {storeToRefs} from 'pinia'
-import {throttle} from 'lodash'
+import * as LODASH from 'lodash'
+
+
+const {throttle} = LODASH
 
 
 // store

@@ -18,13 +18,16 @@
 </template>
 
 <script setup>
-import {debounce} from 'lodash'
+import * as LODASH from 'lodash'
 import {useMusicStore} from '~/stores/music.js'
 import {storeToRefs} from 'pinia'
 import musics from '~/assets/src/data/musics.json'
 import {v4 as uuidv4} from 'uuid'
 import {gsap} from 'gsap'
 import {DEBOUNCE_DELAY} from '~/utils/const.js'
+
+
+const {debounce} = LODASH
 
 
 // store
