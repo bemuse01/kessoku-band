@@ -19,7 +19,7 @@
 
 <script setup>
 import {getImagePath} from '~/utils/method.file.js'
-import {VINYL_SCALE, VINYL_POSITION} from '~/utils/const.js'
+import {VINYL_SCALE, VINYL_SCALE_SMALL, SCREEN_SIZE_640} from '~/utils/const.js'
 import {useMusicStore} from '~/stores/music.js'
 import {storeToRefs} from 'pinia'
 
@@ -52,8 +52,18 @@ const classes = reactive({
 
 
 // box
-const boxScale = computed(() => nowPlaying.value ? `${VINYL_SCALE - 0.06}` : `${VINYL_SCALE}`)
+const boxSize = ref(VINYL_SCALE)
+const boxScale = computed(() => nowPlaying.value ? `${boxSize.value - 0.06}` : `${boxSize.value}`)
 const boxStyle = computed(() => ({transition: 'transform 0.5s', transform: `scale(${boxScale.value})`}))
+const setBoxSize = () => {
+    const {innerWidth} = window
+
+    if(innerWidth < SCREEN_SIZE_640){
+        boxSize.value = VINYL_SCALE_SMALL
+    }else{
+        boxSize.value = VINYL_SCALE
+    }
+}
 
 
 // vinyl bg
@@ -73,15 +83,18 @@ watch(getIdx, () => {
 
 
 // method
-const animate = () => {
-    animateVinyl()
-    animation.value = requestAnimationFrame(() => animate())
+const onWindowResize = () => {
+    setBoxSize()
+}
+const init = () => {
+    setBoxSize()
+    window.addEventListener('resize', () => onWindowResize(), false)
 }
 
 
 // hook
 onMounted(() => {
-
+    init()
 })
 </script>
 

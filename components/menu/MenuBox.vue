@@ -5,7 +5,7 @@
 
         <div :class="classes.boxBg"></div>
 
-        <div :class="classes.logoBg" :style="logoStyle"></div>
+        <!-- <div :class="classes.logoBg" :style="logoStyle"></div> -->
     
         <div
             :class="classes.wrapper"
@@ -52,8 +52,8 @@ const classes = reactive({
     box: 'menu-box flex-1 w-full h-full',
     boxBg: 'absolute w-full h-full bg-[rgba(255,255,255,0.1)] mix-blend-overlay backdrop-blur',
     logoBg: 'absolute right-[-1rem] w-[10rem] h-full bg-[hsl(206,15%,7%)]',
-    wrapper: 'absolute w-[50%] h-full flex px-8 items-center',
-    menuBg: 'absolute right-0 w-[200%] h-full bg-[hsl(206,15%,7%)]',
+    wrapper: 'absolute w-[50%] max-md:w-[75%] max-sm:w-full h-full flex px-8 max-sm:justify-center items-center',
+    menuBg: 'absolute right-0 max-md:right-[-1rem] w-[200%] h-full bg-[hsl(206,15%,7%)]',
     controls: 'absolute w-auto h-[1.25rem] flex gap-4'
 })
 

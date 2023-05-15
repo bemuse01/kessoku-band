@@ -156,6 +156,9 @@ const onMouseWheel = (e) => {
     setIdx(direction, 0, vinyls.value.length - 1)
     updatePy(direction)
 }
+const onTouchMove = (e) => {
+    console.log(e)
+}
 const animate = () => {
     updateCy()
     requestAnimationFrame(() => animate())
@@ -163,6 +166,7 @@ const animate = () => {
 const init = () => {
     animate()
     window.addEventListener('wheel', (e) => onMouseWheel(e))
+    window.addEventListener('touchmove', (e) => onTouchMove(e))
 }
 
 

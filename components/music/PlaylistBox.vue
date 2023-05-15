@@ -41,12 +41,12 @@ import PlaylistMusic from './PlaylistMusic.vue'
 // store
 const store = useMusicStore()
 const {setIdx2, stopMedia} = store
-const {getIdx, isPaused} = storeToRefs(store)
+const {getIdx} = storeToRefs(store)
 
 
 // class
 const classes = reactive({
-    container: 'playlist-box absolute w-[32rem] h-[100%] top-[50%] translate-y-[-50%] overflow-hidden flex',
+    container: 'playlist-box absolute w-[26rem] xl:w-[32rem] h-[100%] top-[50%] translate-y-[-50%] overflow-hidden flex',
     box: 'absolute top-[48%] w-full h-[50%] flex justify-center items-center',
     wrapper: 'absolute top-0 flex flex-col h-auto'
 })

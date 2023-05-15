@@ -82,7 +82,7 @@ const classes = reactive({
     bg: 'absolute flex w-[110%] h-[150%] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] skew-x-[-15deg]',
     num: 'flex justify-center items-center px-0.5 text-sm',
     thumb: 'flex h-full aspect-square rounded-md overflow-hidden',
-    info: 'flex w-[15rem] overflow-hidden flex-col justify-center',
+    info: 'flex w-[12rem] xl:w-[15rem] overflow-hidden flex-col justify-center',
     title: 'overflow-hidden whitespace-nowrap text-ellipsis text-sm',
     artist: 'overflow-hidden whitespace-nowrap text-ellipsis text-xs text-[#6e6e6e]',
     duration: 'text-[#6e6e6e] flex text-sm'

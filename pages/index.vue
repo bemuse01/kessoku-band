@@ -23,7 +23,7 @@
 
                 <bg-box-2 />
 
-                <playlist-box />
+                <playlist-box v-if="playlistFlag" />
 
                 <vinyl-box />
 
@@ -94,6 +94,33 @@ const onClickLoadingBox = async () => {
 const onLoadingDone = () => {
     isLoaded.value = true
 }
+
+
+// flag
+const playlistFlag = ref(true)
+
+
+// method
+const setFlag = () => {
+    const {innerWidth} = window
+
+    if(innerWidth < 1024){
+        playlistFlag.value = false
+    }else{
+        playlistFlag.value = true
+    }
+}
+const onWindowResize = () => {
+    setFlag()
+}
+const init = () => {
+    setFlag()
+    window.addEventListener('resize', () => onWindowResize(), false)
+}
+
+
+// hook
+onMounted(() => init())
 </script>
 
 <style>

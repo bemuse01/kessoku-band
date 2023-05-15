@@ -1,5 +1,5 @@
 import Circle from '../../objects/circle.js'
-import {RADIAN, GLOBAL_DEGREE, VINYL_SCALE, VINYL_POSITION} from '~/utils/const.js'
+import {RADIAN, GLOBAL_DEGREE, VINYL_SCALE, VINYL_SCALE_SMALL, SCREEN_SIZE_640} from '~/utils/const.js'
 import Method from '~/utils/method.math.js'
 
 export default class{
@@ -8,12 +8,14 @@ export default class{
         scene,
         camera,
         seg,
+        rw,
         vh
     }){
         this.engine = engine
         this.scene = scene
         this.camera = camera
         this.seg = seg
+        this.rw = rw
         this.vh = vh
 
         this.boost = 0.5
@@ -35,9 +37,13 @@ export default class{
 
     // create
     create(){
-        const {engine, scene, seg, vh} = this
+        const {engine, scene, seg, rw, vh} = this
 
-        const radius = vh / 2 * VINYL_SCALE
+        let scale = VINYL_SCALE
+
+        if(rw < SCREEN_SIZE_640) scale = VINYL_SCALE_SMALL
+
+        const radius = vh / 2 * scale
 
         // const node = new BABYLON.TransformNode()
 
@@ -74,8 +80,19 @@ export default class{
 
 
     // resize
-    resize({vh}){
+    resize({rw, vh}){
         this.vh = vh
+        if(rw < SCREEN_SIZE_640){
+            this.resizeCircle(VINYL_SCALE_SMALL)
+        }else{
+            this.resizeCircle(VINYL_SCALE)
+        }
+
+    }
+    resizeCircle(scale){
+        const radius = this.vh / 2 * scale
+        this.circle.get().scaling.x = radius
+        this.circle.get().scaling.y = radius
     }
 
 
