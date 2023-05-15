@@ -26,8 +26,11 @@
 </template>
 
 <script setup>
-import {Engine} from 'babylonjs'
+import * as BABYLON from 'babylonjs'
 import Visualizer from './Visualizer.vue'
+
+
+const {Engine} = BABYLON
 
 
 // class
