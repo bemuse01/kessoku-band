@@ -33,27 +33,46 @@
         <div
             :class="classes.duration"
         >
-            <span>00:00</span>
+            <span>{{computedDuration}}</span>
         </div>
         
     </div>
 </template>
 
 <script setup>
-import {getImagePath} from '~/utils/method.file.js'
+import {getImagePath, getAudioPath} from '~/utils/method.file.js'
 import Method from '~/utils/method.math.js'
 import {GLOBAL_DEGREE} from '~/utils/const.js'
 
 
+// props
 const props = defineProps({
     thumbName: String,
+    audioName: String,
     num: Number,
     idx: Number,
     artist: String,
     title: String,
     currentIdx: Number
 })
-const {thumbName, idx, num, artist, title, currentIdx} = toRefs(props)
+const {thumbName, audioName, idx, num, artist, title, currentIdx} = toRefs(props)
+
+
+// duration
+const duration = ref(0)
+const processTime = (time) => {
+    const min = ~~(time / 60)
+    const pmin = min < 10 ? '0' + min : min
+    const sec = ~~(time % 60)
+    const psec = sec < 10 ? '0' + sec : sec
+
+    return `${pmin}:${psec}`
+}
+const computedDuration = computed(() => processTime(duration.value))
+const getDuartion = () => {
+    const audio = new Audio(getAudioPath(audioName.value))
+    audio.addEventListener('loadedmetadata', () => duration.value = audio.duration)
+}
 
 
 // music
@@ -78,7 +97,7 @@ const thumbPath = computed(() => getImagePath(thumbName.value))
 
 // class
 const classes = reactive({
-    music: 'flex flex-row relative w-full h-[3rem] items-center text-white gap-4 my-4',
+    music: 'flex flex-row relative w-full h-[3rem] items-center text-white gap-4 my-4 font-[OpenSansRegular]',
     bg: 'absolute flex w-[110%] h-[150%] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] skew-x-[-15deg]',
     num: 'flex justify-center items-center px-0.5 text-sm',
     thumb: 'flex h-full aspect-square rounded-md overflow-hidden',
@@ -86,6 +105,12 @@ const classes = reactive({
     title: 'overflow-hidden whitespace-nowrap text-ellipsis text-sm',
     artist: 'overflow-hidden whitespace-nowrap text-ellipsis text-xs text-[#6e6e6e]',
     duration: 'text-[#6e6e6e] flex text-sm'
+})
+
+
+// hook
+onMounted(() => {
+    getDuartion()
 })
 </script>
 

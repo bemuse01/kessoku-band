@@ -23,6 +23,8 @@
 
                 <bg-box-2 />
 
+                <header-box />
+
                 <playlist-box v-if="playlistFlag" />
 
                 <vinyl-box />
@@ -62,6 +64,7 @@ import PlaylistBox from '~/components/music/PlaylistBox.vue'
 import LoadingBox from '~/components/loading/LoadingBox.vue'
 import MenuBox from '~/components/menu/MenuBox.vue'
 import BoxWrapper from '~/components/public/BoxWrapper.vue'
+import HeaderBox from '~/components/header/HeaderBox.vue'
 import {useMusicStore} from '~/stores/music.js'
 import Player from '~/assets/js/class/audio/player.js'
 
