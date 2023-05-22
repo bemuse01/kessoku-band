@@ -12,7 +12,7 @@
 <script setup>
 // class
 const classes = reactive({
-    box: 'w-auto h-auto flex justify-center text-base items-center py-5 font-[NotoSansJPBold] text-white',
+    box: 'w-auto h-auto flex justify-center text-base max-sm:text-2xl items-center py-5 font-[NotoSansJPBold] text-white',
     font: 'opacity-30'
 })
 </script>
