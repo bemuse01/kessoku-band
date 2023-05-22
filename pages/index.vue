@@ -77,7 +77,7 @@ const {setPlayer} = store
 // class
 const classes = reactive({
     root: 'relative w-[100vw] h-[100vh] overflow-hidden',
-    wrapper: 'absolute flex flex-col w-full h-full'
+    wrapper: 'absolute flex flex-col max-sm:flex-col-reverse w-full h-full'
 })
 
 

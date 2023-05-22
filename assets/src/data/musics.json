@@ -108,5 +108,27 @@
         "video_filename": "flashbacker.mp4",
         "cover_filename": "default.jpg",
         "color": "#ed709a"
+    },
+    {
+        "id": 10,
+        "artist_en": "Kessoku Band",
+        "title_en": "Into the Light",
+        "artist_jp": "結束バンド",
+        "title_jp": "光の中へ",
+        "audio_filename": "",
+        "video_filename": "into_the_light.mp4",
+        "cover_filename": "into_the_light.jpg",
+        "color": "#f7b41b"
+    },
+    {
+        "id": 11,
+        "artist_en": "Kessoku Band",
+        "title_en": "Blue Spring and Western Sky",
+        "artist_jp": "結束バンド",
+        "title_jp": "青い春と西の空",
+        "audio_filename": "blue_spring.mp3",
+        "video_filename": "",
+        "cover_filename": "into_the_light.jpg",
+        "color": "#f7b41b"
     }
 ]

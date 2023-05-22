@@ -40,7 +40,7 @@
 </template>
 
 <script setup>
-import {getImagePath, getAudioPath} from '~/utils/method.file.js'
+import {getImagePath, getAudioPath, getVideoPath} from '~/utils/method.file.js'
 import Method from '~/utils/method.math.js'
 import {GLOBAL_DEGREE} from '~/utils/const.js'
 
@@ -49,16 +49,18 @@ import {GLOBAL_DEGREE} from '~/utils/const.js'
 const props = defineProps({
     thumbName: String,
     audioName: String,
+    videoName: String,
     num: Number,
     idx: Number,
     artist: String,
     title: String,
     currentIdx: Number
 })
-const {thumbName, audioName, idx, num, artist, title, currentIdx} = toRefs(props)
+const {thumbName, audioName, videoName, idx, num, artist, title, currentIdx} = toRefs(props)
 
 
 // duration
+const mediaType = computed(() => videoName.value === '' ? 'audio' : 'video')
 const duration = ref(0)
 const processTime = (time) => {
     const min = ~~(time / 60)
@@ -70,8 +72,25 @@ const processTime = (time) => {
 }
 const computedDuration = computed(() => processTime(duration.value))
 const getDuartion = () => {
-    const audio = new Audio(getAudioPath(audioName.value))
-    audio.addEventListener('loadedmetadata', () => duration.value = audio.duration)
+
+    switch(mediaType.value){
+        case 'audio':
+
+            const audio = new Audio(getAudioPath(audioName.value))
+            audio.addEventListener('loadedmetadata', () => duration.value = audio.duration)
+
+            break
+        case 'video':
+
+            const video = document.createElement('video')
+            video.src = getVideoPath(videoName.value)
+            video.addEventListener('loadedmetadata', () => duration.value = video.duration)
+
+            break
+        default:
+            break
+    }
+
 }
 
 

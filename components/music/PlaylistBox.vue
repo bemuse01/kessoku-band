@@ -19,6 +19,7 @@
                         :num="music.num"
                         :thumbName="music.thumbName"
                         :audioName="music.audioName"
+                        :videoName="music.videoName"
                         :title="music.title"
                         :artist="music.artist"
                         :currentIdx="getIdx"
@@ -73,7 +74,8 @@ const musics = ref(Musics.map(music => ({
     thumbName: music.cover_filename,
     title: music.title_en,
     artist: music.artist_en,
-    audioName: music.audio_filename
+    audioName: music.audio_filename,
+    videoName: music.video_filename
 })))
 const onClickMusic = (idx) => {
     if(getIdx.value === idx) return
