@@ -2,6 +2,7 @@
     <div
         :class="classes.box"
         @mousedown="(e) => onMouseDownThumb(e)"
+        @touchstart="() => onTouchStartThumb()"
     >
 
         <div :class="classes.wrapper" :ref="el => track = el">
@@ -76,6 +77,7 @@ const thumb = ref(null)
 const thumbLeft = ref('0')
 const thumbStyle = computed(() => ({background: mainColor.value, left: thumbLeft.value}))
 let draggable = false
+let touchable = false
 const updateThumbPosition = (e) => {
     // if(getIsPaused.value) return
 
@@ -97,6 +99,7 @@ const updateThumbPosition2 = () => {
     const left = getVolume() * trackWidth - thumbWidth / 2
     thumbLeft.value = left.toFixed(1) + 'px'
 }
+// mouse
 const onMouseDownThumb = (e) => {
     draggable = true
     updateThumbPosition(e)
@@ -111,9 +114,32 @@ const onMouseMoveThumb = (e) => {
 const onMouseUpThumb = () => {
     draggable = false
 }
+// touch
+const onTouchStartThumb = () => {
+    touchable = true
+}
+const onTouchMoveThumb = (e) => {
+    if(touchable){
+        updateThumbPosition(e)
+    }
+}
+const onTouchEndThumb = () => {
+    touchable = false
+}
 
 
 // method
+// touch
+const onTouchmove = (e) => {
+    const event = e.touches[0]
+    onTouchMoveThumb(event)
+    updateProgress()
+    updateThumbPosition2()
+}
+const onTouchend = () => {
+    onTouchEndThumb()
+}
+// mouse
 const onMouseMove = (e) => {
     onMouseMoveThumb(e)
     updateProgress()
@@ -130,6 +156,8 @@ const init = () => {
     updateProgress()
     document.addEventListener('mousemove', (e) => onMouseMove(e))
     document.addEventListener('mouseup', () => onMouseUp())
+    window.addEventListener('touchmove', (e) => onTouchmove(e))
+    window.addEventListener('touchend', () => onTouchend())
     window.addEventListener('resize', () => onWindowResize(), false)
 }
 

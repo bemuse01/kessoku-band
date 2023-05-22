@@ -2,6 +2,7 @@
     <div
         :class="classes.box"
         @mousedown="(e) => onMouseDownThumb(e)"
+        @touchstart="() => onTouchStartThumb()"
     >
 
         <div :class="classes.wrapper" :ref="el => track = el">
@@ -65,6 +66,7 @@ const trackStyle = computed(() => ({background: mainColor.value}))
 const thumb = ref(null)
 const thumbStyle = computed(() => ({background: mainColor.value, left: '0'}))
 let draggable = false
+let touchable = false
 const updateThumbPosition = (e) => {
     if(getIsPaused.value) return
 
@@ -86,6 +88,10 @@ const updateThumbPosition2 = () => {
     const left = getProgress(mediaType.value) * trackWidth - thumbWidth / 2
     thumbStyle.value.left = left.toFixed(1) + 'px'
 }
+const resetThumb = () => {
+    thumbStyle.value.left = '0'
+}
+// mouse
 const onMouseDownThumb = (e) => {
     draggable = true
     updateThumbPosition(e)
@@ -98,8 +104,17 @@ const onMouseMoveThumb = (e) => {
 const onMouseUpThumb = () => {
     draggable = false
 }
-const resetThumb = () => {
-    thumbStyle.value.left = '0'
+// touch
+const onTouchStartThumb = () => {
+    touchable = true
+}
+const onTouchMoveThumb = (e) => {
+    if(touchable){
+        updateThumbPosition(e)
+    }
+}
+const onTouchEndThumb = () => {
+    touchable = false
 }
 
 
@@ -133,16 +148,29 @@ const animate = () => {
     updateThumbPosition2()
     requestAnimationFrame(() => animate())
 }
+// mouse
 const onMouseMove = (e) => {
     onMouseMoveThumb(e)
 }
 const onMouseUp = () => {
     onMouseUpThumb()
 }
+// touch
+const onTouchmove = (e) => {
+    const event = e.touches[0]
+    onTouchMoveThumb(event)
+    updateProgress()
+    updateThumbPosition2()
+}
+const onTouchend = () => {
+    onTouchEndThumb()
+}
 const init = () => {
     animate()
     document.addEventListener('mousemove', (e) => onMouseMove(e))
     document.addEventListener('mouseup', () => onMouseUp())
+    window.addEventListener('touchmove', (e) => onTouchmove(e))
+    window.addEventListener('touchend', () => onTouchend())
 }
 
 

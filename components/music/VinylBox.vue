@@ -1,6 +1,7 @@
 <template>
     <div
         :class="classes.container"
+        :ref="el => boxRef = el"
     >
         
         <div
@@ -59,6 +60,7 @@ const classes = reactive({
 
 
 // box
+const boxRef = ref(null)
 const boxStyle = computed(() => ({transform: `rotate(${GLOBAL_DEGREE}deg)`}))
 
 
@@ -190,7 +192,7 @@ const animate = () => {
 const init = () => {
     animate()
     window.addEventListener('wheel', (e) => onMouseWheel(e))
-    window.addEventListener('touchstart', (e) => onTouchStart(e))
+    boxRef.value.addEventListener('touchstart', (e) => onTouchStart(e))
     window.addEventListener('touchmove', (e) => onTouchMove(e))
     window.addEventListener('touchend', () => onTouchEnd())
 }
